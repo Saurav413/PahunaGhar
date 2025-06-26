@@ -1,0 +1,17 @@
+/* admin_users.css - styles specific to the admin users page */
+
+.admin-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.admin-header { background: #2563eb; color: white; padding: 20px; border-radius: 10px; margin-bottom: 30px; }
+.admin-nav { background: #1e293b; padding: 15px 0; margin-bottom: 20px; }
+.admin-nav-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+.admin-nav a { color: white; text-decoration: none; padding: 10px 15px; border-radius: 5px; transition: background 0.3s ease; }
+.admin-nav a:hover { background: #374151; }
+.admin-nav a.active { background: #2563eb; }
+.btn { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 500; text-decoration: none; display: inline-block; text-align: center; transition: all 0.3s ease; }
+.btn-primary { background: #2563eb; color: white; }
+.btn-danger { background: #ef4444; color: white; }
+.users-table { background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); overflow: hidden; }
+.table-header { background: #f8fafc; padding: 15px 20px; border-bottom: 1px solid #e2e8f0; }
+.user-row { display: grid; grid-template-columns: 1fr 2fr 2fr 1fr 100px; gap: 15px; padding: 15px 20px; border-bottom: 1px solid #e2e8f0; align-items: center; }
+.no-users { text-align: center; padding: 40px; color: #666; }
+.search-users-input { padding: 8px; border: 1px solid #ddd; border-radius: 5px; } 

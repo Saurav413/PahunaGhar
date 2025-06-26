@@ -1,0 +1,70 @@
+/* register.css - styles specific to the register page */
+
+.logo-blue {}
+.logo-highlight {
+  color: #2563eb;
+}
+.welcome-user {
+  color: #2563eb;
+  font-weight: 500;
+  margin-right: 15px;
+}
+.register-container {
+  max-width: 400px;
+  margin: 48px auto 0 auto;
+}
+.register-title {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.register-form-styled {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background: #fff;
+  padding: 32px 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(44,62,80,0.08);
+}
+.register-error {
+  color: #ef4444;
+  text-align: center;
+}
+.register-success {
+  color: #10b981;
+  text-align: center;
+}
+.register-btn {
+  background: #2563eb;
+  color: #fff;
+  padding: 12px 0;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1em;
+  font-family: 'Montserrat', Arial, sans-serif;
+  cursor: pointer;
+}
+.register-login {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 0.98em;
+}
+.login-link {
+  color: #2563eb;
+}
+.register-footer {
+  width: 100%;
+  background: #e6e7eb;
+  padding: 28px 0 18px 0;
+  text-align: center;
+  font-size: 1.08em;
+  color: #222;
+  letter-spacing: 0.5px;
+  margin-top: 48px;
+  box-shadow: 0 -2px 8px rgba(44,62,80,0.04);
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+.footer-highlight {
+  font-weight: 700;
+  color: #2563eb;
+} 
