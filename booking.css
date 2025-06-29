@@ -1,5 +1,11 @@
 /* Booking Page Styles */
 
+/* Logo styles for navbar */
+.logo-blue {}
+.logo-highlight {
+    color: #2563eb;
+}
+
 .booking-container {
     max-width: 1200px;
     margin: 0 auto;
