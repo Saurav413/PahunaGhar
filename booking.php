@@ -113,8 +113,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin'): ?>
                     <a href="PahunaGhar/user_bookings.php" class="nav-link">My Bookings</a>
                 <?php endif; ?>
+                <a href="lets_chat.php" class="nav-link">Let's Chat</a>
             <?php endif; ?>
-            <a href="lets_chat.php" class="nav-link">Let's Chat</a>
         </div>
         <div class="navbar-center">
             <div class="search-bar">
