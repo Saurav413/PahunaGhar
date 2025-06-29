@@ -2,24 +2,29 @@
 session_start();
 require_once 'config.php';
 
+// Check if user is logged in
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: login.php');
+    exit;
+}
+
 $message = '';
 $messageType = '';
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = trim($_POST['name'] ?? '');
-    $email = trim($_POST['email'] ?? '');
     $message_text = trim($_POST['message'] ?? '');
     
     // Basic validation
-    if (empty($name) || empty($email) || empty($message_text)) {
-        $message = 'Please fill in all fields.';
-        $messageType = 'error';
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $message = 'Please enter a valid email address.';
+    if (empty($message_text)) {
+        $message = 'Please enter your message.';
         $messageType = 'error';
     } else {
         try {
+            // Use logged-in user's information
+            $name = $_SESSION['user_name'];
+            $email = $_SESSION['user_email'];
+            
             $stmt = $pdo->prepare("INSERT INTO contact (name, email, message) VALUES (?, ?, ?)");
             $stmt->execute([$name, $email, $message_text]);
             
@@ -27,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $messageType = 'success';
             
             // Clear form data after successful submission
-            $name = $email = $message_text = '';
+            $message_text = '';
         } catch (PDOException $e) {
             $message = 'Sorry, there was an error sending your message. Please try again.';
             $messageType = 'error';
@@ -85,16 +90,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
         
         <form class="contact-form" method="post" action="lets_chat.php">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required placeholder="Your Name" value="<?php echo htmlspecialchars($name ?? ''); ?>">
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required placeholder="you@example.com" value="<?php echo htmlspecialchars($email ?? ''); ?>">
-            </div>
-
             <div class="form-group">
                 <label for="message">Message</label>
                 <textarea id="message" name="message" rows="5" required placeholder="Your message..."><?php echo htmlspecialchars($message_text ?? ''); ?></textarea>
