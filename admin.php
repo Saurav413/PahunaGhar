@@ -61,7 +61,7 @@ try {
             </div>
             <div class="stat-card">
                 <div class="stat-number"><?php echo $totalUsers; ?></div>
-                <div class="stat-label">Registered Users</div>
+                <div class="stat-label">Total Customers</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">0</div>

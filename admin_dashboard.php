@@ -76,7 +76,7 @@ try {
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-number"><?php echo $totalUsers; ?></div>
-                <div class="stat-label">Total Users</div>
+                <div class="stat-label">Total Customers</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number"><?php echo $totalBookings; ?></div>
