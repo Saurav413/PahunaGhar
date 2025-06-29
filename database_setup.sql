@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS hotels (
 
 -- Insert sample hotel data
 INSERT INTO hotels (name, location, description, price, rating, image_url) VALUES
-('The Soaltee Kathmandu', 'Kathmandu', 'A luxurious hotel in the heart of the city with world-class amenities and stunning views.', '$300/night', 4.8, 'https://soalteehotel.com/uploads/images/20250115105121_67879329ecc905.93783695.jpg'),
+('The Soal,tee Kathmandu', 'Kathmandu', 'A luxurious hotel in the heart of the city with world-class amenities and stunning views.', '$300/night', 4.8, 'https://soalteehotel.com/uploads/images/20250115105121_67879329ecc905.93783695.jpg'),
 ('Hyatt Place Kathmandu', 'Kathmandu', 'Start here. Discover everywhere.', '$103/night', 4.5, 'https://assets.hyatt.com/content/dam/hyatt/hyattdam/images/2025/01/26/0103/KTMZK-P0132-Building-Exterior.jpg/KTMZK-P0132-Building-Exterior.16x9.jpg'),
 ('Gurung Cottage', 'Pokhara', 'A cozy retreat with breathtaking mountain views and personalized service.', '$36.53/night', 4.7, 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/d7/a6/8f/hotel-gurung-cottage.jpg?w=1800&h=1000&s=1'),
 ('The Everest Hotel, Kathmandu', 'Kathmandu', 'Modern suites in the city center, perfect for business and leisure travelers alike.', '$160/night', 4.6, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSusyajFAvsL_e2vtgIWle9ASijkLldLXxciw&s'),

@@ -17,10 +17,10 @@ if (isset($_POST['delete_id'])) {
     try {
         $stmt = $pdo->prepare("DELETE FROM contact WHERE id = ?");
         $stmt->execute([$delete_id]);
-        $message = 'Contact message deleted successfully.';
+        $message = 'Let\'s Chat message deleted successfully.';
         $messageType = 'success';
     } catch (PDOException $e) {
-        $message = 'Error deleting contact message.';
+        $message = 'Error deleting Let\'s Chat message.';
         $messageType = 'error';
     }
 }
@@ -31,7 +31,7 @@ try {
     $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     $contacts = [];
-    $message = 'Error loading contact messages.';
+    $message = 'Error loading Let\'s Chat messages.';
     $messageType = 'error';
 }
 ?>
@@ -41,10 +41,10 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Contacts - Admin Dashboard</title>
+    <title>Manage Let's Chat - Admin Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="admin_contacts.css">
+    <link rel="stylesheet" href="admin_lets_chat.css">
 </head>
 <body>
     <nav class="admin-nav">
@@ -55,7 +55,7 @@ try {
                 <a href="admin_bookings.php">Bookings</a>
                 <a href="admin_reviews.php">Reviews</a>
                 <a href="admin_hotels.php">Hotels</a>
-                <a href="admin_contacts.php" class="active">Contacts</a>
+                <a href="admin_lets_chat.php" class="active">Let's Chat</a>
             </div>
             <div>
                 <a href="homepage.php">View Site</a>
@@ -66,8 +66,8 @@ try {
 
     <div class="admin-container">
         <div class="admin-header">
-            <h1>Manage Contact Messages</h1>
-            <p>View and manage contact form submissions</p>
+            <h1>Manage Let's Chat Messages</h1>
+            <p>View and manage Let's Chat form submissions</p>
         </div>
 
         <?php if (!empty($message)): ?>
@@ -77,11 +77,11 @@ try {
         <?php endif; ?>
 
         <div class="contacts-section">
-            <h2 class="section-title">Contact Messages (<?php echo count($contacts); ?>)</h2>
+            <h2 class="section-title">Let's Chat Messages (<?php echo count($contacts); ?>)</h2>
             
             <?php if (empty($contacts)): ?>
                 <div class="no-data">
-                    <p>No contact messages found.</p>
+                    <p>No Let's Chat messages found.</p>
                 </div>
             <?php else: ?>
                 <table class="data-table">
@@ -114,7 +114,7 @@ try {
                                     </div>
                                 </td>
                                 <td>
-                                    <form method="post" class="inline-form" onsubmit="return confirm('Are you sure you want to delete this contact message?');">
+                                    <form method="post" class="inline-form" onsubmit="return confirm('Are you sure you want to delete this Let\'s Chat message?');">
                                         <input type="hidden" name="delete_id" value="<?php echo $contact['id']; ?>">
                                         <button type="submit" class="btn btn-danger">Delete</button>
                                     </form>

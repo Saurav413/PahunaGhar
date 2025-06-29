@@ -40,7 +40,7 @@ PahunaGhar/
 ├── config.php              # Database configuration
 ├── search.php              # Search API endpoint
 ├── homepage.php            # Main homepage with search
-├── contact.php             # Contact page
+├── lets_chat.php           # Let's Chat page
 ├── login.php               # Login page
 ├── register.php            # Registration page
 ├── admin.php               # Admin dashboard
@@ -91,7 +91,7 @@ Access the admin panel at: `http://localhost/PahunaGhar/admin.php`
    - Press Enter or click Search button
    - Results are displayed immediately
 
-2. **Search from Contact Page**:
+2. **Search from Let's Chat Page**:
    - Search redirects to homepage with results
    - URL includes search parameter
 
@@ -163,13 +163,13 @@ CREATE TABLE hotels (
 
 © 2025 PahunaGhar. All rights reserved.
 
-## Contact Form Functionality
+## Let's Chat Form Functionality
 
-The contact form allows users to send messages to the admin. Features include:
+The Let's Chat form allows users to send messages to the admin. Features include:
 
 - **Form Validation**: Validates name, email, and message fields
 - **Database Storage**: Messages are stored in the `contact` table
-- **Admin Management**: Admins can view and delete contact messages
+- **Admin Management**: Admins can view and delete Let's Chat messages
 - **Success/Error Messages**: User-friendly feedback for form submission
 
 ### Contact Table Structure
@@ -183,9 +183,9 @@ CREATE TABLE contact (
 );
 ```
 
-### Admin Contact Management
-- Access via Admin Dashboard → Contacts
-- View all contact messages with sender details
+### Admin Let's Chat Management
+- Access via Admin Dashboard → Let's Chat
+- View all Let's Chat messages with sender details
 - Delete unwanted messages
 - Sort by submission date (newest first)
 
@@ -198,9 +198,8 @@ CREATE TABLE contact (
 
 ## File Structure
 
-- `contact.php` - Contact form page
-- `admin_contacts.php` - Admin contact management
-- `create_contact_table.sql` - Contact table creation script
+- `lets_chat.php` - Let's Chat form page
+- `admin_lets_chat.php` - Admin Let's Chat management
 - `config.php` - Database configuration
 
 ## Security Features
@@ -213,13 +212,13 @@ CREATE TABLE contact (
 ## Usage
 
 ### For Users
-1. Navigate to the Contact page
+1. Navigate to the Let's Chat page
 2. Fill in your name, email, and message
 3. Submit the form
 4. Receive confirmation message
 
 ### For Admins
 1. Login to admin dashboard
-2. Click on "Contacts" in the navigation
-3. View and manage contact messages
+2. Click on "Let's Chat" in the navigation
+3. View and manage Let's Chat messages
 4. Delete messages as needed

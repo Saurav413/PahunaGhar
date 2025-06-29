@@ -8,16 +8,18 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=1.1">
 </head>
 <body>
     <nav class="navbar">
         <div class="navbar-left">
             <a href="homepage.php" class="logo">Pahuna<span style="color:#2563eb;">Ghar</span></a>
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']): ?>
-                <a href="#" class="nav-link">Listing</a>
+                <?php if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin'): ?>
+                    <a href="PahunaGhar/user_bookings.php" class="nav-link">My Bookings</a>
+                <?php endif; ?>
             <?php endif; ?>
-            <a href="contact.php" class="nav-link">Contact</a>
+            <a href="lets_chat.php" class="nav-link">Let's Chat</a>
         </div>
         <div class="navbar-center">
             <div class="search-bar">
@@ -64,7 +66,7 @@ session_start();
         // Function to create hotel card HTML
         function createHotelCard(hotel) {
             return `
-                <div class="hotel-card">
+                <div class="hotel-card" onclick="window.location.href='booking.php?id=${hotel.id}'" style="cursor: pointer;">
                     <img class="hotel-image" src="${hotel.image_url}" alt="${hotel.name}">
                     <div class="hotel-content">
                         <div class="hotel-name">${hotel.name}</div>

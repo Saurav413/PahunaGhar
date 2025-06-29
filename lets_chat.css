@@ -1,0 +1,173 @@
+/* Let's Chat Page Styles - Consistent with other pages */
+
+.contact-container {
+    max-width: 600px;
+    margin: 48px auto 0 auto;
+    padding: 0;
+}
+
+.contact-title {
+    text-align: center;
+    margin-bottom: 24px;
+    color: #2d3a4b;
+    font-size: 2.5em;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 0 4px 16px rgba(44, 62, 80, 0.08);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    background: #fff;
+    padding: 32px 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(44,62,80,0.08);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #374151;
+    font-size: 1rem;
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 12px;
+    border: 2px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: 'Montserrat', Arial, sans-serif;
+    transition: all 0.3s ease;
+    background: #f9fafb;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.contact-form button {
+    background: #2563eb;
+    color: #fff;
+    padding: 12px 0;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', Arial, sans-serif;
+    margin-top: 10px;
+}
+
+.contact-form button:hover {
+    background: #1e40af;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.contact-form button:active {
+    transform: translateY(0);
+}
+
+.contact-info {
+    text-align: center;
+    color: #6b7280;
+    margin-top: 18px;
+    font-size: 0.98em;
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+/* Message styles */
+.message {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 18px;
+    font-weight: 500;
+    font-family: 'Montserrat', Arial, sans-serif;
+    text-align: center;
+}
+
+.message.success {
+    background: #f0fdf4;
+    color: #10b981;
+    border: 1px solid #bbf7d0;
+}
+
+.message.error {
+    background: #fef2f2;
+    color: #ef4444;
+    border: 1px solid #fecaca;
+}
+
+/* Contact footer */
+.contact-footer {
+    width: 100%;
+    background: #e6e7eb;
+    padding: 28px 0 18px 0;
+    text-align: center;
+    font-size: 1.08em;
+    color: #222;
+    letter-spacing: 0.5px;
+    margin-top: 48px;
+    box-shadow: 0 -2px 8px rgba(44,62,80,0.04);
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.footer-highlight {
+    font-weight: 700;
+    color: #2563eb;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .contact-container {
+        margin: 20px;
+        padding: 0;
+    }
+    
+    .contact-title {
+        font-size: 2rem;
+    }
+    
+    .contact-form {
+        padding: 24px 20px;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-container {
+        margin: 10px;
+    }
+    
+    .contact-title {
+        font-size: 1.8rem;
+    }
+    
+    .contact-form {
+        padding: 20px 16px;
+    }
+} 

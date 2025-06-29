@@ -8,6 +8,13 @@ require_once 'user_config.php';
 
 $error = '';
 $success = '';
+$redirect = $_GET['redirect'] ?? '';
+
+// Check for registration success message from session
+if (isset($_SESSION['registration_success'])) {
+    $success = $_SESSION['registration_success'];
+    unset($_SESSION['registration_success']); // Clear the message after displaying
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
@@ -37,17 +44,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     
                     $success = 'Login successful! Welcome back, ' . $user['name'] . '.';
                     
-                    // Redirect based on user type
+                    // Redirect based on user type and redirect parameter
                     if ($user['user_type'] === 'admin') {
                         header('Location: admin_dashboard.php');
                     } else {
-                        header('Location: homepage.php');
+                        // Check if there's a redirect parameter
+                        if ($redirect === 'booking' && isset($_GET['hotel_id'])) {
+                            header('Location: booking.php?id=' . $_GET['hotel_id']);
+                        } else {
+                            header('Location: homepage.php');
+                        }
                     }
                     exit;
                 }
             } else {
                 if (!$user) {
-                    $error = 'Email not found in database.';
+                    $error = 'Incorrect email. Please try again.';
                 } else {
                     $error = 'Password verification failed.';
                 }
@@ -75,9 +87,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="navbar-left">
             <a href="homepage.php" class="logo logo-blue">Pahuna<span class="logo-highlight">Ghar</span></a>
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']): ?>
-                <a href="#" class="nav-link">Listing</a>
+                <?php if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin'): ?>
+                    <a href="PahunaGhar/user_bookings.php" class="nav-link">My Bookings</a>
+                <?php endif; ?>
             <?php endif; ?>
-            <a href="contact.php" class="nav-link">Contact</a>
+            <a href="lets_chat.php" class="nav-link">Let's Chat</a>
         </div>
         <div class="navbar-center">
             <div class="search-bar">

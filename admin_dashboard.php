@@ -58,7 +58,7 @@ try {
                 <a href="admin_bookings.php">Bookings</a>
                 <a href="admin_reviews.php">Reviews</a>
                 <a href="admin_hotels.php">Hotels</a>
-                <a href="admin_contacts.php">Contacts</a>
+                <a href="admin_lets_chat.php">Let's Chat</a>
             </div>
             <div>
                 <a href="homepage.php">View Site</a>
@@ -92,7 +92,7 @@ try {
             </div>
             <div class="stat-card">
                 <button class="stat-number stat-btn" id="showContactsBtn" type="button"><?php echo $totalContacts; ?></button>
-                <div class="stat-label">Total Contacts</div>
+                <div class="stat-label">Total Let's Chat</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number"><?php echo $averageRating; ?>/5</div>
@@ -154,22 +154,22 @@ try {
                     </div>
                     <div class="quick-action">
                         <div class="quick-action-icon">📧</div>
-                        <h3>Manage Contacts</h3>
-                        <p>View and respond to contact messages</p>
-                        <a href="admin_contacts.php" class="btn btn-primary">Manage Contacts</a>
+                        <h3>Manage Let's Chat</h3>
+                        <p>View and respond to Let's Chat messages</p>
+                        <a href="admin_lets_chat.php" class="btn btn-primary">Manage Let's Chat</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal for contact details -->
+    <!-- Modal for let's chat details -->
     <div id="contactsModal" class="modal" style="display:none;">
         <div class="modal-content">
             <span class="close" id="closeContactsModal">&times;</span>
-            <h2>Contact Details</h2>
+            <h2>Let's Chat Details</h2>
             <div id="contactsDetails">
-                <div class="loading">Loading contacts...</div>
+                <div class="loading">Loading Let's Chat messages...</div>
             </div>
         </div>
     </div>
@@ -314,7 +314,7 @@ try {
             console.log('closeContactsModal:', closeContactsModal);
             if (showContactsBtn && contactsModal && closeContactsModal) {
                 showContactsBtn.addEventListener('click', function() {
-                    console.log('Total Contacts button clicked');
+                    console.log('Total Let's Chat button clicked');
                     contactsModal.style.display = 'block';
                     loadContactsDetails();
                 });
@@ -385,7 +385,7 @@ try {
 
         function loadContactsDetails() {
             const container = document.getElementById('contactsDetails');
-            container.innerHTML = '<div class="loading">Loading contacts...</div>';
+            container.innerHTML = '<div class="loading">Loading Let's Chat messages...</div>';
             fetch('admin_api.php?action=get_all_contacts')
                 .then(response => response.json())
                 .then(data => {

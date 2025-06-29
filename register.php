@@ -33,7 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Insert user with default user_type 'customer'
                 $stmt = $user_pdo->prepare('INSERT INTO register_form (name, email, password, user_type) VALUES (?, ?, ?, ?)');
                 if ($stmt->execute([$name, $email, $hashed_password, 'customer'])) {
-                    $success = 'Registration successful! You can now <a href="login.php" style="color:#2563eb;">login</a>.';
+                    // Set success message in session and redirect to login page
+                    $_SESSION['registration_success'] = 'Registration successful! Please login with your new account.';
+                    header('Location: login.php');
+                    exit();
                 } else {
                     $error = 'Registration failed: ' . implode(' ', $stmt->errorInfo());
                 }
@@ -61,9 +64,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="navbar-left">
             <a href="homepage.php" class="logo logo-blue">Pahuna<span class="logo-highlight">Ghar</span></a>
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']): ?>
-                <a href="#" class="nav-link">Listing</a>
+                <?php if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin'): ?>
+                    <a href="PahunaGhar/user_bookings.php" class="nav-link">My Bookings</a>
+                <?php endif; ?>
             <?php endif; ?>
-            <a href="contact.php" class="nav-link">Contact</a>
+            <a href="lets_chat.php" class="nav-link">Let's Chat</a>
         </div>
         <div class="navbar-center">
             <div class="search-bar">

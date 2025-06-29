@@ -291,12 +291,9 @@ function updateUserType() {
 
 function getAllContacts() {
     global $pdo;
-    try {
-        $stmt = $pdo->query("SELECT * FROM contact ORDER BY created_at DESC");
-        $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode(['success' => true, 'contacts' => $contacts]);
-    } catch (Exception $e) {
-        echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
-    }
+    
+    $stmt = $pdo->query("SELECT * FROM contact ORDER BY created_at DESC");
+    $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode(['success' => true, 'contacts' => $contacts]);
 }
 ?> 

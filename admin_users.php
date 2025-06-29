@@ -29,7 +29,7 @@ $isAdmin = true; // Now properly authenticated
                 <a href="admin_bookings.php">Bookings</a>
                 <a href="admin_reviews.php">Reviews</a>
                 <a href="admin_hotels.php">Hotels</a>
-                <a href="admin_contacts.php">Contacts</a>
+                <a href="admin_lets_chat.php">Let's Chat</a>
             </div>
             <div>
                 <a href="homepage.php">View Site</a>

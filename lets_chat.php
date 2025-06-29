@@ -40,19 +40,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact</title>
+    <title>Let's Chat</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="contact.css">
+    <link rel="stylesheet" href="lets_chat.css?v=1.0">
 </head>
 <body>
     <nav class="navbar">
         <div class="navbar-left">
             <a href="homepage.php" class="logo logo-blue">Pahuna<span class="logo-highlight">Ghar</span></a>
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']): ?>
-                <a href="#" class="nav-link">Listing</a>
+                <?php if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin'): ?>
+                    <a href="PahunaGhar/user_bookings.php" class="nav-link">My Bookings</a>
+                <?php endif; ?>
             <?php endif; ?>
-            <a href="contact.php" class="nav-link">Contact</a>
+            <a href="lets_chat.php" class="nav-link">Let's Chat</a>
         </div>
         <div class="navbar-center">
             <div class="search-bar">
@@ -74,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </nav>
     <div class="container contact-container">
-        <h2 class="contact-title">Contact Us</h2>
+        <h2 class="contact-title">Let's Chat</h2>
         
         <?php if (!empty($message)): ?>
             <div class="message <?php echo $messageType; ?>">
@@ -82,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         <?php endif; ?>
         
-        <form class="contact-form" method="post" action="contact.php">
+        <form class="contact-form" method="post" action="lets_chat.php">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required placeholder="Your Name" value="<?php echo htmlspecialchars($name ?? ''); ?>">
@@ -107,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </footer>
 
     <script>
-        // Search functionality for contact page
+        // Search functionality for let's chat page
         document.addEventListener('DOMContentLoaded', function() {
             // Search button click
             document.getElementById('searchBtn').addEventListener('click', function() {

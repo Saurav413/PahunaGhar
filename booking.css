@@ -1,0 +1,313 @@
+/* Booking Page Styles */
+
+.booking-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.booking-header {
+    margin-bottom: 30px;
+}
+
+.back-link {
+    display: inline-block;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+    margin-bottom: 15px;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: #1e40af;
+}
+
+.booking-header h1 {
+    color: #2d3a4b;
+    font-size: 2.5em;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.booking-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.hotel-details {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(44, 62, 80, 0.1);
+    overflow: hidden;
+}
+
+.hotel-image {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.hotel-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hotel-info {
+    padding: 25px;
+}
+
+.hotel-info h2 {
+    color: #2d3a4b;
+    font-size: 1.8em;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+}
+
+.hotel-location {
+    color: #6b7280;
+    font-size: 1.1em;
+    margin: 0 0 15px 0;
+    font-weight: 500;
+}
+
+.hotel-description {
+    color: #374151;
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+}
+
+.hotel-rating {
+    color: #f59e0b;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.hotel-price {
+    color: #2563eb;
+    font-size: 1.3em;
+    font-weight: 700;
+}
+
+.booking-form-section {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(44, 62, 80, 0.1);
+    padding: 30px;
+}
+
+.booking-form-section h3 {
+    color: #2d3a4b;
+    font-size: 1.5em;
+    font-weight: 700;
+    margin: 0 0 25px 0;
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.95em;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Montserrat', Arial, sans-serif;
+    transition: all 0.3s ease;
+    background: #f9fafb;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.price-summary {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.price-summary h4 {
+    color: #2d3a4b;
+    font-size: 1.2em;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+}
+
+.price-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.price-row:last-child {
+    border-bottom: none;
+}
+
+.price-row.total {
+    font-weight: 700;
+    font-size: 1.1em;
+    color: #2563eb;
+    border-top: 2px solid #2563eb;
+    padding-top: 15px;
+    margin-top: 10px;
+}
+
+.book-btn {
+    background: #2563eb;
+    color: #fff;
+    padding: 15px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', Arial, sans-serif;
+    margin-top: 10px;
+}
+
+.book-btn:hover {
+    background: #1e40af;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.book-btn:active {
+    transform: translateY(0);
+}
+
+.message {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.message.success {
+    background: #f0fdf4;
+    color: #10b981;
+    border: 1px solid #bbf7d0;
+}
+
+.message.error {
+    background: #fef2f2;
+    color: #ef4444;
+    border: 1px solid #fecaca;
+}
+
+.booking-footer {
+    width: 100%;
+    background: #e6e7eb;
+    padding: 28px 0 18px 0;
+    text-align: center;
+    font-size: 1.08em;
+    color: #222;
+    letter-spacing: 0.5px;
+    margin-top: 48px;
+    box-shadow: 0 -2px 8px rgba(44,62,80,0.04);
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.footer-highlight {
+    font-weight: 700;
+    color: #2563eb;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .booking-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .booking-container {
+        padding: 15px;
+    }
+    
+    .booking-header h1 {
+        font-size: 2em;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .booking-form-section {
+        padding: 20px;
+    }
+    
+    .hotel-info {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .booking-container {
+        padding: 10px;
+    }
+    
+    .booking-header h1 {
+        font-size: 1.8em;
+    }
+    
+    .booking-form-section {
+        padding: 15px;
+    }
+    
+    .hotel-info {
+        padding: 15px;
+    }
+    
+    .hotel-image {
+        height: 200px;
+    }
+} 
