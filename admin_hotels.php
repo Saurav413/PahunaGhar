@@ -109,8 +109,8 @@ $isAdmin = true; // Now properly authenticated
                 </div>
                 
                 <div class="form-group">
-                    <label for="hotelImage">Image URL</label>
-                    <input type="url" id="hotelImage" name="image_url" placeholder="https://example.com/image.jpg">
+                    <label for="hotelImage">Hotel Image</label>
+                    <input type="file" id="hotelImage" name="hotel_image" accept="image/*">
                 </div>
                 
                 <div class="form-actions">
@@ -220,7 +220,6 @@ $isAdmin = true; // Now properly authenticated
                 document.getElementById('hotelDescription').value = hotel.description || '';
                 document.getElementById('hotelPrice').value = hotel.price;
                 document.getElementById('hotelRating').value = hotel.rating || 0;
-                document.getElementById('hotelImage').value = hotel.image_url || '';
                 document.getElementById('hotelModal').style.display = 'block';
             }
         }

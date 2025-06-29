@@ -113,7 +113,78 @@ function addHotel() {
     $description = $_POST['description'] ?? '';
     $price = $_POST['price'] ?? '';
     $rating = $_POST['rating'] ?? 0;
-    $image_url = $_POST['image_url'] ?? '';
+    $image_url = '';
+
+    // Handle image upload with validation
+    if (isset($_FILES['hotel_image']) && $_FILES['hotel_image']['error'] !== UPLOAD_ERR_NO_FILE) {
+        $file = $_FILES['hotel_image'];
+        $maxSize = 2 * 1024 * 1024; // 2MB
+        $allowedExts = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+        $allowedMime = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        $fileTmpPath = $file['tmp_name'];
+        $fileName = basename($file['name']);
+        $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+        $fileSize = $file['size'];
+        
+        // Check upload error first
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            $errorMessages = [
+                UPLOAD_ERR_INI_SIZE => 'File exceeds upload_max_filesize',
+                UPLOAD_ERR_FORM_SIZE => 'File exceeds MAX_FILE_SIZE',
+                UPLOAD_ERR_PARTIAL => 'File was only partially uploaded',
+                UPLOAD_ERR_NO_FILE => 'No file was uploaded',
+                UPLOAD_ERR_NO_TMP_DIR => 'Missing temporary folder',
+                UPLOAD_ERR_CANT_WRITE => 'Failed to write file to disk',
+                UPLOAD_ERR_EXTENSION => 'A PHP extension stopped the file upload'
+            ];
+            $errorMsg = $errorMessages[$file['error']] ?? 'Unknown upload error';
+            echo json_encode(['error' => 'Upload error: ' . $errorMsg]);
+            return;
+        }
+        
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $fileTmpPath);
+        finfo_close($finfo);
+        
+        // Validate extension, mime, and size
+        if (!in_array($fileExt, $allowedExts)) {
+            echo json_encode(['error' => 'Invalid file type. Only JPG, PNG, GIF, and WEBP allowed.']);
+            return;
+        }
+        if (!in_array($mimeType, $allowedMime)) {
+            echo json_encode(['error' => 'Invalid image MIME type: ' . $mimeType]);
+            return;
+        }
+        if ($fileSize > $maxSize) {
+            echo json_encode(['error' => 'File size exceeds 2MB limit.']);
+            return;
+        }
+        
+        // Sanitize and save
+        $uploadDir = __DIR__ . '/uploads/hotels/';
+        if (!is_dir($uploadDir)) {
+            if (!mkdir($uploadDir, 0777, true)) {
+                echo json_encode(['error' => 'Failed to create upload directory']);
+                return;
+            }
+        }
+        
+        if (!is_writable($uploadDir)) {
+            echo json_encode(['error' => 'Upload directory is not writable']);
+            return;
+        }
+        
+        $newFileName = uniqid('hotel_', true) . '.' . $fileExt;
+        $destPath = $uploadDir . $newFileName;
+        
+        if (!move_uploaded_file($fileTmpPath, $destPath)) {
+            $lastError = error_get_last();
+            echo json_encode(['error' => 'Failed to move uploaded file: ' . ($lastError['message'] ?? 'Unknown error')]);
+            return;
+        }
+        
+        $image_url = 'uploads/hotels/' . $newFileName;
+    }
     
     if (empty($name) || empty($location) || empty($price)) {
         echo json_encode(['error' => 'Name, location, and price are required']);
@@ -148,7 +219,95 @@ function updateHotel() {
     $description = $_POST['description'] ?? '';
     $price = $_POST['price'] ?? '';
     $rating = $_POST['rating'] ?? 0;
-    $image_url = $_POST['image_url'] ?? '';
+    $image_url = '';
+
+    // Get current image_url if no new file is uploaded
+    $old_image_url = '';
+    $stmt = $pdo->prepare("SELECT image_url FROM hotels WHERE id = ?");
+    $stmt->execute([$id]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $old_image_url = $row ? $row['image_url'] : '';
+
+    if (isset($_FILES['hotel_image']) && $_FILES['hotel_image']['error'] !== UPLOAD_ERR_NO_FILE) {
+        $file = $_FILES['hotel_image'];
+        $maxSize = 2 * 1024 * 1024; // 2MB
+        $allowedExts = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+        $allowedMime = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        $fileTmpPath = $file['tmp_name'];
+        $fileName = basename($file['name']);
+        $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+        $fileSize = $file['size'];
+        
+        // Check upload error first
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            $errorMessages = [
+                UPLOAD_ERR_INI_SIZE => 'File exceeds upload_max_filesize',
+                UPLOAD_ERR_FORM_SIZE => 'File exceeds MAX_FILE_SIZE',
+                UPLOAD_ERR_PARTIAL => 'File was only partially uploaded',
+                UPLOAD_ERR_NO_FILE => 'No file was uploaded',
+                UPLOAD_ERR_NO_TMP_DIR => 'Missing temporary folder',
+                UPLOAD_ERR_CANT_WRITE => 'Failed to write file to disk',
+                UPLOAD_ERR_EXTENSION => 'A PHP extension stopped the file upload'
+            ];
+            $errorMsg = $errorMessages[$file['error']] ?? 'Unknown upload error';
+            echo json_encode(['error' => 'Upload error: ' . $errorMsg]);
+            return;
+        }
+        
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $fileTmpPath);
+        finfo_close($finfo);
+        
+        // Validate extension, mime, and size
+        if (!in_array($fileExt, $allowedExts)) {
+            echo json_encode(['error' => 'Invalid file type. Only JPG, PNG, GIF, and WEBP allowed.']);
+            return;
+        }
+        if (!in_array($mimeType, $allowedMime)) {
+            echo json_encode(['error' => 'Invalid image MIME type: ' . $mimeType]);
+            return;
+        }
+        if ($fileSize > $maxSize) {
+            echo json_encode(['error' => 'File size exceeds 2MB limit.']);
+            return;
+        }
+        
+        // Sanitize and save
+        $uploadDir = __DIR__ . '/uploads/hotels/';
+        if (!is_dir($uploadDir)) {
+            if (!mkdir($uploadDir, 0777, true)) {
+                echo json_encode(['error' => 'Failed to create upload directory']);
+                return;
+            }
+        }
+        
+        if (!is_writable($uploadDir)) {
+            echo json_encode(['error' => 'Upload directory is not writable']);
+            return;
+        }
+        
+        $newFileName = uniqid('hotel_', true) . '.' . $fileExt;
+        $destPath = $uploadDir . $newFileName;
+        
+        if (!move_uploaded_file($fileTmpPath, $destPath)) {
+            $lastError = error_get_last();
+            echo json_encode(['error' => 'Failed to move uploaded file: ' . ($lastError['message'] ?? 'Unknown error')]);
+            return;
+        }
+        
+        $image_url = 'uploads/hotels/' . $newFileName;
+        
+        // Remove old image file if it exists and is not empty
+        if (!empty($old_image_url)) {
+            $oldPath = __DIR__ . '/' . $old_image_url;
+            if (file_exists($oldPath)) {
+                @unlink($oldPath);
+            }
+        }
+    } else {
+        // No new file uploaded, keep the old image_url
+        $image_url = $old_image_url;
+    }
     
     if (empty($id) || empty($name) || empty($location) || empty($price)) {
         echo json_encode(['error' => 'ID, name, location, and price are required']);

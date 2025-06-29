@@ -67,7 +67,8 @@ session_start();
         function createHotelCard(hotel) {
             return `
                 <div class="hotel-card" onclick="window.location.href='booking.php?id=${hotel.id}'" style="cursor: pointer;">
-                    <img class="hotel-image" src="${hotel.image_url}" alt="${hotel.name}">
+                    <img class="hotel-image" src="${hotel.image_url}" alt="${hotel.name}" 
+                         onerror="this.src='https://via.placeholder.com/250x150?text=Hotel+Image'">
                     <div class="hotel-content">
                         <div class="hotel-name">${hotel.name}</div>
                         <div class="hotel-description">${hotel.description}</div>
