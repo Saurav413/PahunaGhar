@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 session_start();
 require_once 'config.php';
 
@@ -55,22 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $messageType = 'error';
     } else {
         try {
-            // Drop existing bookings table if it exists and recreate it with correct structure
-            $pdo->exec("DROP TABLE IF EXISTS bookings");
-            $pdo->exec("CREATE TABLE bookings (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                user_id INT NOT NULL,
-                hotel_id INT NOT NULL,
-                hotel_name VARCHAR(255) NOT NULL,
-                check_in_date DATE NOT NULL,
-                check_out_date DATE NOT NULL,
-                guests INT NOT NULL,
-                special_requests TEXT,
-                status ENUM('pending', 'confirmed', 'cancelled') DEFAULT 'pending',
-                total_price DECIMAL(10,2),
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            )");
-            
             // Calculate total price (simple calculation: price per night * number of nights)
             $check_in_date = new DateTime($check_in);
             $check_out_date = new DateTime($check_out);
@@ -111,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="homepage.php" class="logo logo-blue">Pahuna<span class="logo-highlight">Ghar</span></a>
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']): ?>
                 <?php if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin'): ?>
-                    <a href="PahunaGhar/user_bookings.php" class="nav-link">My Bookings</a>
+                    <a href="user_bookings.php" class="nav-link">My Bookings</a>
                 <?php endif; ?>
                 <a href="lets_chat.php" class="nav-link">Let's Chat</a>
             <?php endif; ?>
