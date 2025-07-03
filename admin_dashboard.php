@@ -53,6 +53,47 @@ try {
 } catch (Exception $e) {
     $recentReviews = [];
 }
+
+// Fetch all users for Manage Users section
+$allUsers = [];
+try {
+    $stmt = $user_pdo->query('SELECT id, name, email, user_type, created_at FROM register_form ORDER BY created_at DESC');
+    $allUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    $allUsers = [];
+}
+
+// Fetch recent bookings for Recent Bookings section
+$recentBookings = [];
+try {
+    $stmt = $user_pdo->query('
+        SELECT b.id, u.name AS user_name, h.name AS hotel_name, b.check_in_date, b.check_out_date, b.status, b.created_at
+        FROM bookings b
+        JOIN register_form u ON b.user_id = u.id
+        JOIN hotels h ON b.hotel_id = h.id
+        ORDER BY b.created_at DESC
+        LIMIT 10
+    ');
+    $recentBookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    $recentBookings = [];
+}
+
+// Fetch 10 most recent reviews for Recent Reviews section
+$recentReviews = [];
+try {
+    $stmt = $user_pdo->query('
+        SELECT r.id, h.name AS hotel_name, u.name AS user_name, r.rating, r.comment, r.review_date
+        FROM reviews r
+        JOIN hotels h ON r.hotel_id = h.id
+        JOIN register_form u ON r.user_id = u.id
+        ORDER BY r.review_date DESC
+        LIMIT 10
+    ');
+    $recentReviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    $recentReviews = [];
+}
 ?>
 
 <!DOCTYPE html>
@@ -123,7 +164,30 @@ try {
                     <a href="admin_users.php" class="btn btn-primary">View All</a>
                 </h2>
                 <div id="recentUsers">
-                    <div class="loading">Loading users...</div>
+                    <?php if (empty($allUsers)): ?>
+                        <div class="loading">No users found.</div>
+                    <?php else: ?>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>User Type</th>
+                                    <th>Registered</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($allUsers as $user): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($user['name']); ?></td>
+                                        <td><?php echo htmlspecialchars($user['email']); ?></td>
+                                        <td><?php echo htmlspecialchars(ucfirst($user['user_type'])); ?></td>
+                                        <td><?php echo date('Y-m-d', strtotime($user['created_at'])); ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php endif; ?>
                 </div>
             </div>
 
@@ -133,7 +197,34 @@ try {
                     <a href="admin_bookings.php" class="btn btn-primary">View All</a>
                 </h2>
                 <div id="recentBookings">
-                    <div class="loading">Loading bookings...</div>
+                    <?php if (empty($recentBookings)): ?>
+                        <div class="loading">No bookings found.</div>
+                    <?php else: ?>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Hotel</th>
+                                    <th>Check-in</th>
+                                    <th>Check-out</th>
+                                    <th>Status</th>
+                                    <th>Booked At</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($recentBookings as $booking): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($booking['user_name']); ?></td>
+                                        <td><?php echo htmlspecialchars($booking['hotel_name']); ?></td>
+                                        <td><?php echo htmlspecialchars($booking['check_in_date']); ?></td>
+                                        <td><?php echo htmlspecialchars($booking['check_out_date']); ?></td>
+                                        <td><?php echo htmlspecialchars(ucfirst($booking['status'])); ?></td>
+                                        <td><?php echo date('Y-m-d H:i', strtotime($booking['created_at'])); ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php endif; ?>
                 </div>
             </div>
 

@@ -93,7 +93,11 @@ session_start();
         // Function to create hotel card HTML
         function createHotelCard(hotel) {
             const reviewCount = hotel.review_count || 0;
-            const avgRating = hotel.avg_rating || hotel.rating || 0;
+            let avgRating = hotel.avg_rating;
+            if (avgRating === null || avgRating === undefined || isNaN(Number(avgRating))) {
+                avgRating = hotel.rating || 0;
+            }
+            avgRating = Number(avgRating);
             const reviewText = reviewCount > 0 ? `(${reviewCount} reviews)` : '(No reviews yet)';
             
             return `

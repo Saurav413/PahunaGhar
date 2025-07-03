@@ -16,7 +16,7 @@ switch ($action) {
 
 function getPublicHotels() {
     global $pdo;
-    
+    $debug = '';
     try {
         // Get hotels with review count and average rating
         $stmt = $pdo->query("
@@ -29,10 +29,10 @@ function getPublicHotels() {
             ORDER BY h.created_at DESC
         ");
         $hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        echo json_encode(['success' => true, 'hotels' => $hotels]);
+        echo json_encode(['success' => true, 'hotels' => $hotels, 'debug' => $debug]);
     } catch (Exception $e) {
-        echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
+        $debug = $e->getMessage();
+        echo json_encode(['error' => 'Database error: ' . $e->getMessage(), 'debug' => $debug]);
     }
 }
 ?> 
