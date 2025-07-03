@@ -11,6 +11,24 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 $user_id = $_SESSION['user_id'];
 $bookings = [];
 $error = '';
+$success = '';
+
+// Handle booking cancellation
+if (isset($_POST['cancel_booking_id'])) {
+    $cancel_id = (int)$_POST['cancel_booking_id'];
+    try {
+        // Only allow cancelling user's own booking if not already cancelled/completed
+        $stmt = $pdo->prepare("UPDATE bookings SET status = 'cancelled' WHERE id = ? AND user_id = ? AND status NOT IN ('cancelled', 'completed')");
+        $stmt->execute([$cancel_id, $user_id]);
+        if ($stmt->rowCount() > 0) {
+            $success = 'Booking cancelled successfully.';
+        } else {
+            $error = 'Unable to cancel booking. It may already be cancelled or completed.';
+        }
+    } catch (PDOException $e) {
+        $error = 'Error cancelling booking: ' . $e->getMessage();
+    }
+}
 
 try {
     $stmt = $pdo->prepare("SELECT * FROM bookings WHERE user_id = ? ORDER BY created_at DESC");
@@ -192,6 +210,9 @@ try {
         <?php if ($error): ?>
             <div class="message error"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
+        <?php if ($success): ?>
+            <div class="message success"><?php echo htmlspecialchars($success); ?></div>
+        <?php endif; ?>
         <?php if (empty($bookings)): ?>
             <div class="message">You have no bookings yet.</div>
         <?php else: ?>
@@ -206,6 +227,7 @@ try {
                         <th>Total Price</th>
                         <th>Booked At</th>
                         <th>Review</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -226,6 +248,16 @@ try {
                                     </div>
                                 <?php else: ?>
                                     <a href="submit_review.php?hotel_id=<?php echo $booking['hotel_id']; ?>&booking_id=<?php echo $booking['id']; ?>" class="review-btn">Write Review</a>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <?php if (!in_array($booking['status'], ['cancelled', 'completed'])): ?>
+                                    <form method="post" onsubmit="return confirm('Are you sure you want to cancel this booking?');" style="display:inline;">
+                                        <input type="hidden" name="cancel_booking_id" value="<?php echo $booking['id']; ?>">
+                                        <button type="submit" class="review-btn" style="background:linear-gradient(135deg,#e74c3c,#c0392b);margin-top:4px;">Cancel</button>
+                                    </form>
+                                <?php else: ?>
+                                    <span style="color:#e74c3c;font-weight:600;">N/A</span>
                                 <?php endif; ?>
                             </td>
                         </tr>
