@@ -18,7 +18,16 @@ function getPublicHotels() {
     global $pdo;
     
     try {
-        $stmt = $pdo->query("SELECT * FROM hotels ORDER BY created_at DESC");
+        // Get hotels with review count and average rating
+        $stmt = $pdo->query("
+            SELECT h.*, 
+                   COUNT(r.id) as review_count,
+                   COALESCE(AVG(r.rating), 0) as avg_rating
+            FROM hotels h
+            LEFT JOIN reviews r ON h.id = r.hotel_id
+            GROUP BY h.id
+            ORDER BY h.created_at DESC
+        ");
         $hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
         echo json_encode(['success' => true, 'hotels' => $hotels]);

@@ -37,6 +37,22 @@ try {
     $averageRating = 0;
     $totalContacts = 0;
 }
+
+// Fetch 5 most recent reviews for dashboard
+$recentReviews = [];
+try {
+    $stmt = $user_pdo->query('
+        SELECT r.*, h.name AS hotel_name, u.name AS user_name
+        FROM reviews r
+        JOIN hotels h ON r.hotel_id = h.id
+        JOIN register_form u ON r.user_id = u.id
+        ORDER BY r.review_date DESC
+        LIMIT 5
+    ');
+    $recentReviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    $recentReviews = [];
+}
 ?>
 
 <!DOCTYPE html>
@@ -127,7 +143,32 @@ try {
                     <a href="admin_reviews.php" class="btn btn-primary">View All</a>
                 </h2>
                 <div id="recentReviews">
-                    <div class="loading">Loading reviews...</div>
+                    <?php if (empty($recentReviews)): ?>
+                        <div class="loading">No recent reviews.</div>
+                    <?php else: ?>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Hotel</th>
+                                    <th>User</th>
+                                    <th>Rating</th>
+                                    <th>Comment</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($recentReviews as $review): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($review['hotel_name']); ?></td>
+                                        <td><?php echo htmlspecialchars($review['user_name']); ?></td>
+                                        <td>⭐ <?php echo htmlspecialchars($review['rating']); ?>/5</td>
+                                        <td><?php echo htmlspecialchars(mb_strimwidth($review['comment'], 0, 40, '...')); ?></td>
+                                        <td><?php echo date('Y-m-d H:i', strtotime($review['review_date'])); ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php endif; ?>
                 </div>
             </div>
 

@@ -9,6 +9,33 @@ session_start();
     <title>Homepage</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=1.1">
+    <style>
+        .hotel-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .book-btn, .reviews-btn {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .book-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+        .reviews-btn {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+        }
+        .book-btn:hover, .reviews-btn:hover {
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -65,16 +92,24 @@ session_start();
     <script>
         // Function to create hotel card HTML
         function createHotelCard(hotel) {
+            const reviewCount = hotel.review_count || 0;
+            const avgRating = hotel.avg_rating || hotel.rating || 0;
+            const reviewText = reviewCount > 0 ? `(${reviewCount} reviews)` : '(No reviews yet)';
+            
             return `
-                <div class="hotel-card" onclick="window.location.href='booking.php?id=${hotel.id}'" style="cursor: pointer;">
+                <div class="hotel-card">
                     <img class="hotel-image" src="${hotel.image_url}" alt="${hotel.name}" 
                          onerror="this.src='https://via.placeholder.com/250x150?text=Hotel+Image'">
                     <div class="hotel-content">
                         <div class="hotel-name">${hotel.name}</div>
                         <div class="hotel-description">${hotel.description}</div>
                         <div class="hotel-bottom-row">
-                            <div class="hotel-rating">&#9733; ${hotel.rating}/5</div>
+                            <div class="hotel-rating">&#9733; ${avgRating.toFixed(1)}/5 ${reviewText}</div>
                             <div class="hotel-price">${hotel.price}</div>
+                        </div>
+                        <div class="hotel-actions">
+                            <button onclick="window.location.href='booking.php?id=${hotel.id}'" class="book-btn">Book Now</button>
+                            <button onclick="window.location.href='hotel_reviews.php?id=${hotel.id}'" class="reviews-btn">View Reviews</button>
                         </div>
                     </div>
                 </div>

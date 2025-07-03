@@ -16,6 +16,21 @@ try {
     $stmt = $pdo->prepare("SELECT * FROM bookings WHERE user_id = ? ORDER BY created_at DESC");
     $stmt->execute([$user_id]);
     $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Get user's reviews for each hotel
+    $user_reviews = [];
+    if (!empty($bookings)) {
+        $hotel_ids = array_column($bookings, 'hotel_id');
+        $placeholders = str_repeat('?,', count($hotel_ids) - 1) . '?';
+        $stmt = $pdo->prepare("SELECT hotel_id, rating, comment FROM reviews WHERE user_id = ? AND hotel_id IN ($placeholders)");
+        $params = array_merge([$user_id], $hotel_ids);
+        $stmt->execute($params);
+        $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($reviews as $review) {
+            $user_reviews[$review['hotel_id']] = $review;
+        }
+    }
 } catch (PDOException $e) {
     $error = 'Error fetching bookings: ' . $e->getMessage();
 }
@@ -101,6 +116,38 @@ try {
             max-width: 500px;
             text-align: center;
         }
+        .review-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        .review-btn:hover {
+            transform: translateY(-1px);
+            color: white;
+        }
+        .update-review {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+        .review-status {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            align-items: center;
+        }
+        .reviewed-badge {
+            background: #d4edda;
+            color: #155724;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
         @media (max-width: 1000px) {
             .bookings-panel {
                 padding: 18px 4px 12px 4px;
@@ -158,6 +205,7 @@ try {
                         <th>Status</th>
                         <th>Total Price</th>
                         <th>Booked At</th>
+                        <th>Review</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -170,6 +218,16 @@ try {
                             <td><?php echo htmlspecialchars(ucfirst($booking['status'])); ?></td>
                             <td>$<?php echo htmlspecialchars(number_format($booking['total_price'], 2)); ?></td>
                             <td><?php echo htmlspecialchars($booking['created_at']); ?></td>
+                            <td>
+                                <?php if (isset($user_reviews[$booking['hotel_id']])): ?>
+                                    <div class="review-status">
+                                        <span class="reviewed-badge">Reviewed ⭐ <?php echo htmlspecialchars($user_reviews[$booking['hotel_id']]['rating']); ?></span>
+                                        <a href="submit_review.php?hotel_id=<?php echo $booking['hotel_id']; ?>&booking_id=<?php echo $booking['id']; ?>" class="review-btn update-review">Update Review</a>
+                                    </div>
+                                <?php else: ?>
+                                    <a href="submit_review.php?hotel_id=<?php echo $booking['hotel_id']; ?>&booking_id=<?php echo $booking['id']; ?>" class="review-btn">Write Review</a>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
