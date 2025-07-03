@@ -90,6 +90,8 @@ session_start();
     </footer>
 
     <script>
+        let allHotels = [];
+
         // Function to create hotel card HTML
         function createHotelCard(hotel) {
             const reviewCount = hotel.review_count || 0;
@@ -123,7 +125,9 @@ session_start();
         // Function to display hotels
         function displayHotels(hotels) {
             const hotelList = document.getElementById('hotel-list');
-            hotelList.innerHTML = hotels.map(hotel => createHotelCard(hotel)).join('');
+            hotelList.innerHTML = hotels.length > 0
+                ? hotels.map(hotel => createHotelCard(hotel)).join('')
+                : '<div class="no-hotels">No hotels found</div>';
         }
 
         // Fetch hotels from the database on page load
@@ -132,7 +136,8 @@ session_start();
                 .then(response => response.json())
                 .then(data => {
                     if (data.success && data.hotels.length > 0) {
-                        displayHotels(data.hotels);
+                        allHotels = data.hotels;
+                        displayHotels(allHotels);
                     } else {
                         document.getElementById('hotel-list').innerHTML = '<div class="no-hotels">No hotels found</div>';
                     }
@@ -143,8 +148,32 @@ session_start();
                 });
         }
 
+        function filterHotels(searchTerm) {
+            searchTerm = searchTerm.trim().toLowerCase();
+            if (!searchTerm) {
+                displayHotels(allHotels);
+                return;
+            }
+            const filtered = allHotels.filter(hotel =>
+                (hotel.name && hotel.name.toLowerCase().includes(searchTerm)) ||
+                (hotel.location && hotel.location.toLowerCase().includes(searchTerm)) ||
+                (hotel.price && hotel.price.toLowerCase().includes(searchTerm))
+            );
+            displayHotels(filtered);
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             loadHotelsFromDB();
+            document.getElementById('searchBtn').addEventListener('click', function() {
+                const searchTerm = document.getElementById('searchInput').value;
+                filterHotels(searchTerm);
+            });
+            document.getElementById('searchInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    filterHotels(this.value);
+                }
+            });
         });
     </script>
 </body>
