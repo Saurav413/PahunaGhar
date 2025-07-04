@@ -1,6 +1,15 @@
 <?php
 session_start();
 require_once 'config.php';
+require_once __DIR__ . '/PHPMailer/src/PHPMailer.php';
+require_once __DIR__ . '/PHPMailer/src/SMTP.php';
+require_once __DIR__ . '/PHPMailer/src/Exception.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 // Check if admin is logged in
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_type'] !== 'admin') {
@@ -22,6 +31,38 @@ if (isset($_POST['booking_id']) && isset($_POST['status'])) {
             $stmt->execute([$status, $booking_id]);
             $message = 'Booking status updated successfully.';
             $messageType = 'success';
+
+            if ($status === 'confirmed') {
+                // Fetch user email and booking details
+                $stmt = $pdo->prepare("SELECT u.email, u.name, b.hotel_name, b.check_in_date, b.check_out_date FROM bookings b LEFT JOIN register_form u ON b.user_id = u.id WHERE b.id = ?");
+                $stmt->execute([$booking_id]);
+                $bookingInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($bookingInfo && !empty($bookingInfo['email'])) {
+                    $mail = new PHPMailer(true);
+                    try {
+                        $mail->SMTPDebug = 2;
+                        $mail->Debugoutput = 'html';
+                        $mail->isSMTP();
+                        $mail->Host = 'smtp.gmail.com';
+                        $mail->SMTPAuth = true;
+                        $mail->Username = 'pahunaghar76@gmail.com'; // Your Gmail address
+                        $mail->Password = 'ecgk wujk owbs orpr';     // Your Gmail app password
+                        $mail->SMTPSecure = 'tls';
+                        $mail->Port = 587;
+
+                        $mail->setFrom('pahunaghar76@gmail.com', 'PahunaGhar');
+                        $mail->addAddress($bookingInfo['email'], $bookingInfo['name']);
+
+                        $mail->Subject = 'Booking Confirmed - PahunaGhar';
+                        $mail->Body    = "Dear {$bookingInfo['name']},\n\nYour booking for {$bookingInfo['hotel_name']} from {$bookingInfo['check_in_date']} to {$bookingInfo['check_out_date']} has been confirmed!\n\nThank you for choosing PahunaGhar.";
+
+                        $mail->send();
+                    } catch (Exception $e) {
+                        echo "Mailer Error: " . $mail->ErrorInfo;
+                    }
+                }
+            }
         } catch (PDOException $e) {
             $message = 'Error updating booking status.';
             $messageType = 'error';
@@ -202,12 +243,12 @@ try {
                                 </td>
                                 <td>
                                     <div class="date-info">
-                                        <?php echo date('M j, Y', strtotime($booking['check_in'])); ?>
+                                        <?php echo date('M j, Y', strtotime($booking['check_in_date'])); ?>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="date-info">
-                                        <?php echo date('M j, Y', strtotime($booking['check_out'])); ?>
+                                        <?php echo date('M j, Y', strtotime($booking['check_out_date'])); ?>
                                     </div>
                                 </td>
                                 <td>
