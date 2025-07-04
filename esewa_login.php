@@ -12,6 +12,7 @@ $booking_id = isset($_GET['booking_id']) ? (int)$_GET['booking_id'] : 0;
 $message = '';
 $messageType = '';
 $booking = null;
+$error = '';
 
 if ($booking_id > 0) {
     $stmt = $pdo->prepare("SELECT * FROM bookings WHERE id = ? AND user_id = ?");
@@ -24,6 +25,21 @@ if ($booking_id > 0) {
 } else {
     $message = 'Invalid booking.';
     $messageType = 'error';
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $input_id = $_POST['esewa_id'] ?? '';
+    $input_pass = $_POST['esewa_pass'] ?? '';
+    // Check against database
+    $stmt = $pdo->prepare("SELECT * FROM esewa_users WHERE esewa_id = ? AND password = ?");
+    $stmt->execute([$input_id, $input_pass]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($user) {
+        header('Location: esewa.php?booking_id=' . $booking_id);
+        exit;
+    } else {
+        $error = 'Invalid eSewa ID or Password/MPIN.';
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -207,6 +223,7 @@ if ($booking_id > 0) {
     </style>
 </head>
 <body>
+    <a href="homepage.php" style="position:absolute;left:44px;top:32px;color:#10b981;font-weight:900;font-size:1.3rem;text-decoration:none;padding:8px 18px;border-radius:8px;background:#23272f;box-shadow:0 2px 8px rgba(44,62,80,0.10);transition:background 0.2s;z-index:10;">PahunaGhar</a>
     <div class="esewa-main-container">
         <div class="esewa-card">
             <div class="esewa-left">
@@ -248,10 +265,13 @@ if ($booking_id > 0) {
             </div>
             <div class="esewa-right">
                 <div class="esewa-form-title">Sign in to your account</div>
-                <form class="esewa-form">
-                    <input type="text" class="esewa-input" placeholder="eSewa ID" disabled>
-                    <input type="password" class="esewa-input" placeholder="Password/MPIN" disabled>
-                    <button type="button" class="esewa-btn" disabled>LOGIN</button>
+                <form class="esewa-form" method="post">
+                    <input type="text" class="esewa-input" name="esewa_id" placeholder="eSewa ID" required>
+                    <input type="password" class="esewa-input" name="esewa_pass" placeholder="Password/MPIN" required>
+                    <button type="submit" class="esewa-btn">LOGIN</button>
+                    <?php if (!empty($error)): ?>
+                        <div style="color:#ef4444;text-align:center;font-weight:700;margin-top:10px;"> <?php echo htmlspecialchars($error); ?> </div>
+                    <?php endif; ?>
                 </form>
                
                 

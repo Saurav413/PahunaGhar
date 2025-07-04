@@ -114,6 +114,72 @@ session_start();
             color: #666;
             font-style: italic;
         }
+        /* Dark mode styles */
+        body.dark-mode {
+            background: #181a20 !important;
+            color: #f3f4f6 !important;
+        }
+        body.dark-mode .navbar,
+        body.dark-mode .container,
+        body.dark-mode .hotel-card,
+        body.dark-mode .bookings-panel {
+            background: #23272f !important;
+            color: #f3f4f6 !important;
+            box-shadow: 0 4px 24px rgba(16, 24, 40, 0.22) !important;
+        }
+        body.dark-mode .nav-link,
+        body.dark-mode .logo {
+            color: #e0eafc !important;
+        }
+        body.dark-mode .logo span,
+        body.dark-mode .logo {
+            color: #10b981 !important;
+        }
+        body.dark-mode .hotel-card {
+            border: 1.5px solid #353945 !important;
+        }
+        body.dark-mode .hotel-name,
+        body.dark-mode .hotel-description,
+        body.dark-mode .hotel-rating,
+        body.dark-mode .hotel-price {
+            color: #f3f4f6 !important;
+        }
+        body.dark-mode .book-btn {
+            background: linear-gradient(135deg, #10b981, #2563eb) !important;
+            color: #fff !important;
+        }
+        body.dark-mode .reviews-btn {
+            background: linear-gradient(135deg, #a78bfa, #7c3aed) !important;
+            color: #fff !important;
+        }
+        body.dark-mode .book-btn:hover, body.dark-mode .reviews-btn:hover {
+            filter: brightness(1.15);
+        }
+        body.dark-mode .search-bar input,
+        body.dark-mode .search-bar button {
+            background: #23272f !important;
+            color: #e0eafc !important;
+            border: 1.5px solid #353945 !important;
+        }
+        body.dark-mode .search-suggestions {
+            background: #23272f !important;
+            color: #e0eafc !important;
+            border: 1.5px solid #353945 !important;
+        }
+        body.dark-mode .suggestion-item {
+            background: #23272f !important;
+            color: #e0eafc !important;
+        }
+        body.dark-mode .suggestion-item:hover {
+            background: #2563eb !important;
+            color: #fff !important;
+        }
+        body.dark-mode .footer-highlight {
+            color: #10b981 !important;
+        }
+        body.dark-mode .welcome-title, body.dark-mode .welcome-message {
+            color: #fff !important;
+        }
     </style>
 </head>
 <body>
@@ -122,7 +188,7 @@ session_start();
             <a href="homepage.php" class="logo">Pahuna<span style="color:#2563eb;">Ghar</span></a>
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']): ?>
                 <?php if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin'): ?>
-                    <a href="PahunaGhar/user_bookings.php" class="nav-link">My Bookings</a>
+                    <a href="user_bookings.php" class="nav-link">My Bookings</a>
                 <?php endif; ?>
                 <a href="lets_chat.php" class="nav-link">Let's Chat</a>
             <?php endif; ?>
@@ -145,6 +211,7 @@ session_start();
                 <a href="login.php" class="nav-link">Login</a>
                 <a href="register.php" class="nav-link">Register</a>
             <?php endif; ?>
+            <button id="themeToggle" style="margin-left:18px;padding:8px 16px;border-radius:6px;border:none;cursor:pointer;font-weight:600;">🌙 Dark Mode</button>
         </div>
     </nav>
     <header class="hero-section">
@@ -384,6 +451,26 @@ session_start();
                 }
             });
         });
+    </script>
+    <script>
+    document.getElementById('themeToggle').onclick = function() {
+        document.body.classList.toggle('dark-mode');
+        // Save preference
+        if(document.body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+            this.textContent = '☀️ Light Mode';
+        } else {
+            localStorage.setItem('theme', 'light');
+            this.textContent = '🌙 Dark Mode';
+        }
+    };
+    // On page load, set theme from localStorage
+    window.onload = function() {
+        if(localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            document.getElementById('themeToggle').textContent = '☀️ Light Mode';
+        }
+    };
     </script>
 </body>
 </html> 

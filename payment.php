@@ -233,6 +233,9 @@ if (
     </style>
 </head>
 <body>
+    <a href="homepage.php" style="position:absolute;left:44px;top:32px;font-weight:900;font-size:1.3rem;text-decoration:none;padding:8px 18px;border-radius:8px;background:#23272f;box-shadow:0 2px 8px rgba(44,62,80,0.10);transition:background 0.2s;z-index:10;">
+        <span style="color:#2563eb;">Pahuna</span><span style="color:#10b981;">Ghar</span>
+    </a>
     <div class="payment-main-container">
         <div class="payment-card">
             <div class="payment-left">

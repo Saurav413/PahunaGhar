@@ -25,6 +25,22 @@ if ($booking_id > 0) {
     $message = 'Invalid booking.';
     $messageType = 'error';
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $input_id = $_POST['khalti_id'] ?? '';
+    $input_pass = $_POST['khalti_pass'] ?? '';
+    // Check against database
+    $stmt = $pdo->prepare("SELECT * FROM khalti_users WHERE khalti_id = ? AND password = ?");
+    $stmt->execute([$input_id, $input_pass]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($user) {
+        $_SESSION['khalti_id'] = $input_id;
+        header('Location: khalti.php?booking_id=' . $booking_id);
+        exit;
+    } else {
+        $error = 'Invalid Khalti ID or Password/MPIN.';
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -190,6 +206,7 @@ if ($booking_id > 0) {
     </style>
 </head>
 <body>
+    <a href="homepage.php" style="position:absolute;left:44px;top:32px;color:#7c3aed;font-weight:900;font-size:1.3rem;text-decoration:none;padding:8px 18px;border-radius:8px;background:#23272f;box-shadow:0 2px 8px rgba(44,62,80,0.10);transition:background 0.2s;z-index:10;">PahunaGhar</a>
     <div class="khalti-main-container">
         <div class="khalti-card">
             <div class="khalti-left">
@@ -231,13 +248,16 @@ if ($booking_id > 0) {
             </div>
             <div class="khalti-right">
                 <div class="khalti-form-title">Sign in to your account</div>
-                <form class="khalti-form">
-                    <input type="text" class="khalti-input" placeholder="Khalti ID" disabled>
-                    <input type="password" class="khalti-input" placeholder="Password/MPIN" disabled>
-                    <button type="button" class="khalti-btn" disabled>LOGIN</button>
+                <form class="khalti-form" method="post">
+                    <input type="text" class="khalti-input" name="khalti_id" placeholder="Khalti ID" required>
+                    <input type="password" class="khalti-input" name="khalti_pass" placeholder="Password/MPIN" required>
+                    <button type="submit" class="khalti-btn">LOGIN</button>
+                    <?php if (!empty($error)): ?>
+                        <div style="color:#ef4444;text-align:center;font-weight:700;margin-top:10px;"> <?php echo htmlspecialchars($error); ?> </div>
+                    <?php endif; ?>
                 </form>
                 
-                <a href="#" class="khalti-forgot">Forgot Password?</a>
+        
                 <a href="payment.php?booking_id=<?php echo $booking_id; ?>" class="khalti-back" style="color:#10b981;text-decoration:underline;display:block;text-align:center;margin-top:12px;font-weight:700;">Back to Payment Method</a>
             </div>
         </div>
