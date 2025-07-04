@@ -1,6 +1,5 @@
 /* register.css - styles specific to the register page */
 
-.logo-blue {}
 .logo-highlight {
   color: #2563eb;
 }
@@ -33,6 +32,20 @@
 .register-success {
   color: #10b981;
   text-align: center;
+}
+.label-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.2em;
+}
+.register-info {
+  color: #2563eb;
+  text-align: left;
+  font-size: 0.75em;
+  font-family: 'Montserrat', Arial, sans-serif;
+  margin-bottom: 0;
+  font-weight: 600 !important;
 }
 .register-btn {
   background: #2563eb;

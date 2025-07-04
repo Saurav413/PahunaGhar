@@ -35,6 +35,85 @@ session_start();
         .book-btn:hover, .reviews-btn:hover {
             transform: translateY(-2px);
         }
+        
+        /* Search Suggestions Styles */
+        .search-bar {
+            position: relative;
+        }
+        
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .suggestion-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+        
+        .suggestion-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .suggestion-item.selected {
+            background-color: #e3f2fd;
+        }
+        
+        .suggestion-icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .suggestion-icon.hotel {
+            background-color: #3498db;
+        }
+        
+        .suggestion-icon.location {
+            background-color: #27ae60;
+        }
+        
+        .suggestion-icon.price {
+            background-color: #f39c12;
+        }
+        
+        .suggestion-text {
+            flex: 1;
+            font-size: 14px;
+        }
+        
+        .no-suggestions {
+            padding: 16px;
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -52,6 +131,7 @@ session_start();
             <div class="search-bar">
                 <input type="text" id="searchInput" placeholder="Search destinations, hotels, or prices...">
                 <button id="searchBtn">Search</button>
+                <div id="searchSuggestions" class="search-suggestions"></div>
             </div>
         </div>
         <div class="navbar-right">
@@ -162,16 +242,145 @@ session_start();
             displayHotels(filtered);
         }
 
+        // Search suggestions functionality
+        let searchTimeout;
+        let selectedSuggestionIndex = -1;
+        let currentSuggestions = [];
+
+        function getSearchSuggestions(searchTerm) {
+            if (searchTerm.length < 2) {
+                hideSuggestions();
+                return;
+            }
+
+            fetch(`search_suggestions.php?q=${encodeURIComponent(searchTerm)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.suggestions && data.suggestions.length > 0) {
+                        showSuggestions(data.suggestions);
+                    } else {
+                        showNoSuggestions();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching suggestions:', error);
+                    hideSuggestions();
+                });
+        }
+
+        function showSuggestions(suggestions) {
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            currentSuggestions = suggestions;
+            selectedSuggestionIndex = -1;
+
+            const suggestionsHTML = suggestions.map((suggestion, index) => {
+                const iconText = suggestion.type === 'hotel' ? 'H' : 
+                                suggestion.type === 'location' ? 'L' : 'P';
+                return `
+                    <div class="suggestion-item" data-index="${index}" onclick="selectSuggestion('${suggestion.suggestion}')">
+                        <div class="suggestion-icon ${suggestion.type}">${iconText}</div>
+                        <div class="suggestion-text">${suggestion.display_text}</div>
+                    </div>
+                `;
+            }).join('');
+
+            suggestionsContainer.innerHTML = suggestionsHTML;
+            suggestionsContainer.style.display = 'block';
+        }
+
+        function showNoSuggestions() {
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            suggestionsContainer.innerHTML = '<div class="no-suggestions">No suggestions found</div>';
+            suggestionsContainer.style.display = 'block';
+        }
+
+        function hideSuggestions() {
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            suggestionsContainer.style.display = 'none';
+            currentSuggestions = [];
+            selectedSuggestionIndex = -1;
+        }
+
+        function selectSuggestion(suggestion) {
+            document.getElementById('searchInput').value = suggestion;
+            hideSuggestions();
+            filterHotels(suggestion);
+        }
+
+        function handleKeyNavigation(e) {
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            if (suggestionsContainer.style.display === 'none') return;
+
+            const suggestionItems = suggestionsContainer.querySelectorAll('.suggestion-item');
+            
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                selectedSuggestionIndex = Math.min(selectedSuggestionIndex + 1, suggestionItems.length - 1);
+                updateSelectedSuggestion(suggestionItems);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                selectedSuggestionIndex = Math.max(selectedSuggestionIndex - 1, -1);
+                updateSelectedSuggestion(suggestionItems);
+            } else if (e.key === 'Enter' && selectedSuggestionIndex >= 0) {
+                e.preventDefault();
+                const selectedSuggestion = currentSuggestions[selectedSuggestionIndex];
+                if (selectedSuggestion) {
+                    selectSuggestion(selectedSuggestion.suggestion);
+                }
+            } else if (e.key === 'Escape') {
+                hideSuggestions();
+            }
+        }
+
+        function updateSelectedSuggestion(suggestionItems) {
+            suggestionItems.forEach((item, index) => {
+                item.classList.toggle('selected', index === selectedSuggestionIndex);
+            });
+        }
+
+        // Close suggestions when clicking outside
+        document.addEventListener('click', function(e) {
+            const searchBar = document.querySelector('.search-bar');
+            if (!searchBar.contains(e.target)) {
+                hideSuggestions();
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             loadHotelsFromDB();
+            
+            const searchInput = document.getElementById('searchInput');
+            
+            // Search button click
             document.getElementById('searchBtn').addEventListener('click', function() {
-                const searchTerm = document.getElementById('searchInput').value;
+                const searchTerm = searchInput.value;
                 filterHotels(searchTerm);
+                hideSuggestions();
             });
-            document.getElementById('searchInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
+            
+            // Input events for suggestions
+            searchInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                const searchTerm = this.value.trim();
+                
+                if (searchTerm.length >= 2) {
+                    searchTimeout = setTimeout(() => {
+                        getSearchSuggestions(searchTerm);
+                    }, 300); // Debounce for 300ms
+                } else {
+                    hideSuggestions();
+                }
+            });
+            
+            // Keyboard navigation
+            searchInput.addEventListener('keydown', handleKeyNavigation);
+            
+            // Enter key for search
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && selectedSuggestionIndex === -1) {
                     e.preventDefault();
                     filterHotels(this.value);
+                    hideSuggestions();
                 }
             });
         });

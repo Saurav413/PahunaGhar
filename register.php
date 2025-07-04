@@ -100,7 +100,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="name">Name</label>
             <input type="text" id="name" name="name" required placeholder="Your Name">
 
-            <label for="email">Email</label>
+            <div class="label-row">
+                <label for="email" style="margin-bottom: 0;">Email</label>
+                
+            </div>
             <input type="email" id="email" name="email" required placeholder="you@example.com">
 
             <label for="password">Password</label>
