@@ -30,6 +30,14 @@ if (isset($_POST['cancel_booking_id'])) {
     }
 }
 
+// Handle payment action
+if (isset($_POST['pay_booking_id'])) {
+    $pay_id = (int)$_POST['pay_booking_id'];
+    // Redirect to payment page with booking ID
+    header('Location: payment.php?booking_id=' . $pay_id);
+    exit;
+}
+
 try {
     $stmt = $pdo->prepare("SELECT * FROM bookings WHERE user_id = ? ORDER BY created_at DESC");
     $stmt->execute([$user_id]);
@@ -256,6 +264,12 @@ try {
                                         <input type="hidden" name="cancel_booking_id" value="<?php echo $booking['id']; ?>">
                                         <button type="submit" class="review-btn" style="background:linear-gradient(135deg,#e74c3c,#c0392b);margin-top:4px;">Cancel</button>
                                     </form>
+                                    <?php if (strtolower(trim($booking['status'])) === 'available'): ?>
+                                        <form method="post" style="display:inline; margin-left: 8px;">
+                                            <input type="hidden" name="pay_booking_id" value="<?php echo $booking['id']; ?>">
+                                            <button type="submit" class="review-btn" style="background:linear-gradient(135deg,#10b981,#059669);margin-top:4px;">Pay Now</button>
+                                        </form>
+                                    <?php endif; ?>
                                 <?php else: ?>
                                     <span style="color:#e74c3c;font-weight:600;">N/A</span>
                                 <?php endif; ?>

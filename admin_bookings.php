@@ -25,7 +25,7 @@ if (isset($_POST['booking_id']) && isset($_POST['status'])) {
     $booking_id = (int)$_POST['booking_id'];
     $status = $_POST['status'];
     
-    if (in_array($status, ['pending', 'confirmed', 'cancelled'])) {
+    if (in_array($status, ['pending', 'available', 'confirmed', 'cancelled'])) {
         try {
             $stmt = $pdo->prepare("UPDATE bookings SET status = ? WHERE id = ?");
             $stmt->execute([$status, $booking_id]);
@@ -264,6 +264,7 @@ try {
                                 <td>
                                     <select class="status-select status-<?php echo $booking['status']; ?>" onchange="updateStatus(<?php echo $booking['id']; ?>, this.value)">
                                         <option value="pending" <?php echo $booking['status'] === 'pending' ? 'selected' : ''; ?>>Pending</option>
+                                        <option value="available" <?php echo $booking['status'] === 'available' ? 'selected' : ''; ?>>Available</option>
                                         <option value="confirmed" <?php echo $booking['status'] === 'confirmed' ? 'selected' : ''; ?>>Confirmed</option>
                                         <option value="cancelled" <?php echo $booking['status'] === 'cancelled' ? 'selected' : ''; ?>>Cancelled</option>
                                     </select>
