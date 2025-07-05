@@ -297,13 +297,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <textarea id="comment" name="comment" placeholder="Share your experience with this hotel..." required><?php echo htmlspecialchars($existing_review['comment'] ?? ''); ?></textarea>
                 </div>
 
-                <?php if (!empty($existing_review['image'])): ?>
-                    <!-- Debug output removed -->
-                <?php endif; ?>
                 <?php if (!empty($existing_review['image']) && file_exists(__DIR__ . '/uploads/review_images/' . $existing_review['image'])): ?>
                     <div class="image-preview-section" style="margin-bottom:12px;">
                         <label>Current Image:</label><br>
-                        <img src="uploads/review_images/<?php echo htmlspecialchars($existing_review['image']); ?>" alt="Current Review Image" style="max-width:120px;max-height:90px;border-radius:8px;box-shadow:0 2px 8px rgba(44,62,80,0.10);margin-bottom:6px;">
+                        <img src="uploads/review_images/<?php echo htmlspecialchars($existing_review['image']); ?>" alt="Current Review Image" style="max-width:120px;max-height:90px;border-radius:8px;box-shadow:0 2px 8px rgba(44,62,80,0.10);margin-bottom:6px;cursor:pointer;" onclick="showImageModal(this.src)">
                         <br>
                         <label><input type="checkbox" name="remove_image" value="1"> Remove current image</label>
                     </div>
@@ -320,6 +317,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
         </div>
     </div>
+
+    <!-- Image Preview Modal -->
+    <div id="imageModal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;">
+        <span style="position:absolute;top:30px;right:50px;font-size:2.5rem;color:#fff;cursor:pointer;z-index:10001;" onclick="closeImageModal()">&times;</span>
+        <img id="modalImg" src="" style="max-width:90vw;max-height:80vh;border-radius:12px;box-shadow:0 4px 32px rgba(44,62,80,0.25);border:6px solid #fff;z-index:10000;">
+    </div>
+    <script>
+    function showImageModal(src) {
+        document.getElementById('modalImg').src = src;
+        document.getElementById('imageModal').style.display = 'flex';
+    }
+    function closeImageModal() {
+        document.getElementById('imageModal').style.display = 'none';
+        document.getElementById('modalImg').src = '';
+    }
+    // Optional: Close modal on background click
+    window.addEventListener('click', function(e) {
+        var modal = document.getElementById('imageModal');
+        if (e.target === modal) closeImageModal();
+    });
+    </script>
 
     <footer class="booking-footer">
         © 2025 <span class="footer-highlight">PahunaGhar</span>. All rights reserved.
