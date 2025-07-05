@@ -20,6 +20,28 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSI
 $message = '';
 $messageType = '';
 
+function sendBookingEmail($to, $name, $subject, $body) {
+    $mail = new PHPMailer(true);
+    try {
+        $mail->SMTPDebug = 2;
+        $mail->Debugoutput = 'html';
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'pahunaghar76@gmail.com'; // Your Gmail address
+        $mail->Password = 'ecgk wujk owbs orpr';     // Your Gmail app password
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+        $mail->setFrom('pahunaghar76@gmail.com', 'PahunaGhar');
+        $mail->addAddress($to, $name);
+        $mail->Subject = $subject;
+        $mail->Body    = $body;
+        $mail->send();
+    } catch (Exception $e) {
+        echo "Mailer Error: " . $mail->ErrorInfo;
+    }
+}
+
 // Handle status update
 if (isset($_POST['booking_id']) && isset($_POST['status'])) {
     $booking_id = (int)$_POST['booking_id'];
@@ -32,35 +54,21 @@ if (isset($_POST['booking_id']) && isset($_POST['status'])) {
             $message = 'Booking status updated successfully.';
             $messageType = 'success';
 
-            if ($status === 'confirmed') {
+            if (in_array($status, ['confirmed', 'available'])) {
                 // Fetch user email and booking details
                 $stmt = $pdo->prepare("SELECT u.email, u.name, b.hotel_name, b.check_in_date, b.check_out_date FROM bookings b LEFT JOIN user_register_form u ON b.user_id = u.id WHERE b.id = ?");
                 $stmt->execute([$booking_id]);
                 $bookingInfo = $stmt->fetch(PDO::FETCH_ASSOC);
 
                 if ($bookingInfo && !empty($bookingInfo['email'])) {
-                    $mail = new PHPMailer(true);
-                    try {
-                        $mail->SMTPDebug = 2;
-                        $mail->Debugoutput = 'html';
-                        $mail->isSMTP();
-                        $mail->Host = 'smtp.gmail.com';
-                        $mail->SMTPAuth = true;
-                        $mail->Username = 'pahunaghar76@gmail.com'; // Your Gmail address
-                        $mail->Password = 'ecgk wujk owbs orpr';     // Your Gmail app password
-                        $mail->SMTPSecure = 'tls';
-                        $mail->Port = 587;
-
-                        $mail->setFrom('pahunaghar76@gmail.com', 'PahunaGhar');
-                        $mail->addAddress($bookingInfo['email'], $bookingInfo['name']);
-
-                        $mail->Subject = 'Booking Confirmed - PahunaGhar';
-                        $mail->Body    = "Dear {$bookingInfo['name']},\n\nYour booking for {$bookingInfo['hotel_name']} from {$bookingInfo['check_in_date']} to {$bookingInfo['check_out_date']} has been confirmed!\n\nThank you for choosing PahunaGhar.";
-
-                        $mail->send();
-                    } catch (Exception $e) {
-                        echo "Mailer Error: " . $mail->ErrorInfo;
+                    if ($status === 'confirmed') {
+                        $subject = 'Booking Confirmed - PahunaGhar';
+                        $body = "Dear {$bookingInfo['name']},\n\nYour booking for {$bookingInfo['hotel_name']} from {$bookingInfo['check_in_date']} to {$bookingInfo['check_out_date']} has been confirmed!\n\nThank you for choosing PahunaGhar.";
+                    } elseif ($status === 'available') {
+                        $subject = 'Booking Available - PahunaGhar';
+                        $body = "Dear {$bookingInfo['name']},\n\nYour booking for {$bookingInfo['hotel_name']} from {$bookingInfo['check_in_date']} to {$bookingInfo['check_out_date']} is now available for payment.\n\nPlease log in to your account to complete the payment and confirm your booking.\n\nThank you for choosing PahunaGhar.";
                     }
+                    sendBookingEmail($bookingInfo['email'], $bookingInfo['name'], $subject, $body);
                 }
             }
         } catch (PDOException $e) {
