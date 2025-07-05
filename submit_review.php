@@ -48,7 +48,39 @@ try {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $rating = (float)($_POST['rating'] ?? 0);
     $comment = trim($_POST['comment'] ?? '');
-    
+    $image_filename = $existing_review['image'] ?? null;
+    $remove_image = isset($_POST['remove_image']);
+    $new_image_uploaded = false;
+    // Handle image upload
+    if (isset($_FILES['review_image']) && $_FILES['review_image']['error'] === UPLOAD_ERR_OK) {
+        $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+        if (in_array($_FILES['review_image']['type'], $allowed_types)) {
+            $ext = pathinfo($_FILES['review_image']['name'], PATHINFO_EXTENSION);
+            $image_filename_new = 'review_' . time() . '_' . rand(1000,9999) . '.' . $ext;
+            $target_path = __DIR__ . '/uploads/review_images/' . $image_filename_new;
+            if (!is_dir(__DIR__ . '/uploads/review_images/')) {
+                mkdir(__DIR__ . '/uploads/review_images/', 0777, true);
+            }
+            if (move_uploaded_file($_FILES['review_image']['tmp_name'], $target_path)) {
+                // Remove old image if exists
+                if (!empty($image_filename) && file_exists(__DIR__ . '/uploads/review_images/' . $image_filename)) {
+                    unlink(__DIR__ . '/uploads/review_images/' . $image_filename);
+                }
+                $image_filename = $image_filename_new;
+                $new_image_uploaded = true;
+            }
+        } else {
+            $message = 'Only JPG, PNG, and GIF images are allowed.';
+            $messageType = 'error';
+        }
+    }
+    // Handle image removal
+    if ($remove_image && !empty($image_filename)) {
+        if (file_exists(__DIR__ . '/uploads/review_images/' . $image_filename)) {
+            unlink(__DIR__ . '/uploads/review_images/' . $image_filename);
+        }
+        $image_filename = null;
+    }
     // Basic validation
     if ($rating < 1 || $rating > 5) {
         $message = 'Please select a rating between 1 and 5.';
@@ -59,17 +91,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (strlen($comment) < 10) {
         $message = 'Review comment must be at least 10 characters long.';
         $messageType = 'error';
-    } else {
+    } elseif ($messageType !== 'error') {
         try {
             if ($existing_review) {
                 // Update existing review
-                $stmt = $pdo->prepare("UPDATE reviews SET rating = ?, comment = ?, review_date = CURRENT_TIMESTAMP WHERE user_id = ? AND hotel_id = ?");
-                $stmt->execute([$rating, $comment, $_SESSION['user_id'], $hotel_id]);
+                $sql = "UPDATE reviews SET rating = ?, comment = ?, review_date = CURRENT_TIMESTAMP, image = ? WHERE user_id = ? AND hotel_id = ?";
+                $params = [$rating, $comment, $image_filename, $_SESSION['user_id'], $hotel_id];
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute($params);
                 $message = 'Review updated successfully!';
             } else {
                 // Insert new review
-                $stmt = $pdo->prepare("INSERT INTO reviews (user_id, hotel_id, rating, comment) VALUES (?, ?, ?, ?)");
-                $stmt->execute([$_SESSION['user_id'], $hotel_id, $rating, $comment]);
+                $sql = "INSERT INTO reviews (user_id, hotel_id, rating, comment, image) VALUES (?, ?, ?, ?, ?)";
+                $params = [$_SESSION['user_id'], $hotel_id, $rating, $comment, $image_filename];
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute($params);
                 $message = 'Review submitted successfully!';
             }
             $messageType = 'success';
@@ -239,7 +275,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             <?php endif; ?>
 
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 <div class="rating-section">
                     <label for="rating">Your Rating:</label>
                     <div class="star-rating">
@@ -259,6 +295,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="comment-section">
                     <label for="comment">Your Review:</label>
                     <textarea id="comment" name="comment" placeholder="Share your experience with this hotel..." required><?php echo htmlspecialchars($existing_review['comment'] ?? ''); ?></textarea>
+                </div>
+
+                <?php if (!empty($existing_review['image'])): ?>
+                    <!-- Debug output removed -->
+                <?php endif; ?>
+                <?php if (!empty($existing_review['image']) && file_exists(__DIR__ . '/uploads/review_images/' . $existing_review['image'])): ?>
+                    <div class="image-preview-section" style="margin-bottom:12px;">
+                        <label>Current Image:</label><br>
+                        <img src="uploads/review_images/<?php echo htmlspecialchars($existing_review['image']); ?>" alt="Current Review Image" style="max-width:120px;max-height:90px;border-radius:8px;box-shadow:0 2px 8px rgba(44,62,80,0.10);margin-bottom:6px;">
+                        <br>
+                        <label><input type="checkbox" name="remove_image" value="1"> Remove current image</label>
+                    </div>
+                <?php endif; ?>
+
+                <div class="image-upload-section" style="margin-bottom:22px;">
+                    <label for="review_image">Upload an Image (optional):</label>
+                    <input type="file" id="review_image" name="review_image" accept="image/*" style="padding:8px 0;">
                 </div>
 
                 <button type="submit" class="submit-btn">
