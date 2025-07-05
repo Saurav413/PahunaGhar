@@ -177,7 +177,7 @@ require_once 'config.php';
             
             if (mpinInput.type === 'password') {
                 mpinInput.type = 'text';
-                toggleBtn.textContent = '🙈';
+                toggleBtn.textContent = '👁️';
                 toggleBtn.title = 'Hide MPIN';
             } else {
                 mpinInput.type = 'password';

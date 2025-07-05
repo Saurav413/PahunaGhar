@@ -48,7 +48,7 @@ try {
     if (!empty($bookings)) {
         $hotel_ids = array_column($bookings, 'hotel_id');
         $placeholders = str_repeat('?,', count($hotel_ids) - 1) . '?';
-        $stmt = $pdo->prepare("SELECT hotel_id, rating, comment FROM reviews WHERE user_id = ? AND hotel_id IN ($placeholders)");
+        $stmt = $pdo->prepare("SELECT hotel_id, rating, comment, image FROM reviews WHERE user_id = ? AND hotel_id IN ($placeholders)");
         $params = array_merge([$user_id], $hotel_ids);
         $stmt->execute($params);
         $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
