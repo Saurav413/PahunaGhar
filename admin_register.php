@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'All fields are required.';
     } elseif ($password !== $confirm_password) {
         $error = 'Passwords do not match.';
-    } elseif (!in_array($admin_role, ['super_admin', 'admin', 'moderator'])) {
+    } elseif ($admin_role !== 'admin') {
         $error = 'Invalid admin role.';
     } else {
         try {
@@ -100,9 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <label for="admin_role">Admin Role</label>
             <select id="admin_role" name="admin_role" required>
-                <option value="admin" <?php echo ($_POST['admin_role'] ?? '') === 'admin' ? 'selected' : ''; ?>>Admin</option>
-                <option value="moderator" <?php echo ($_POST['admin_role'] ?? '') === 'moderator' ? 'selected' : ''; ?>>Moderator</option>
-                <option value="super_admin" <?php echo ($_POST['admin_role'] ?? '') === 'super_admin' ? 'selected' : ''; ?>>Super Admin</option>
+                <option value="admin" selected>Admin</option>
             </select>
 
             <label for="password">Password</label>

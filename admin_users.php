@@ -16,6 +16,20 @@ try {
 } catch (Exception $e) {
     $allUsers = [];
 }
+
+// Handle user deletion
+if (isset($_POST['delete_user_id'])) {
+    $delete_id = (int)$_POST['delete_user_id'];
+    try {
+        $stmt = $user_pdo->prepare('DELETE FROM user_register_form WHERE id = ?');
+        $stmt->execute([$delete_id]);
+        // Optionally, add a success message or redirect
+        header('Location: admin_users.php?deleted=1');
+        exit;
+    } catch (Exception $e) {
+        // Optionally, handle error
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -172,6 +186,35 @@ try {
             .admin-header-box { padding: 24px 2vw 18px 2vw; }
             .admin-header-box h1 { font-size: 1.5rem; }
         }
+        .action-btn {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            margin-right: 8px;
+            transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+            box-shadow: 0 2px 8px rgba(44,62,80,0.08);
+        }
+        .edit-btn {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: #fff;
+        }
+        .edit-btn:hover {
+            background: linear-gradient(135deg, #1e40af, #2563eb);
+            color: #fff;
+        }
+        .delete-btn {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: #fff;
+        }
+        .delete-btn:hover {
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -206,11 +249,12 @@ try {
                     <th>Email</th>
                     <th>User Type</th>
                     <th>Registered</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (empty($allUsers)): ?>
-                    <tr><td colspan="4" style="text-align:center;">No users found.</td></tr>
+                    <tr><td colspan="5" style="text-align:center;">No users found.</td></tr>
                 <?php else: ?>
                     <?php foreach ($allUsers as $user): ?>
                         <tr>
@@ -218,6 +262,13 @@ try {
                             <td><?php echo htmlspecialchars($user['email']); ?></td>
                             <td><?php echo htmlspecialchars(ucfirst($user['user_type'])); ?></td>
                             <td><?php echo date('Y-m-d', strtotime($user['created_at'])); ?></td>
+                            <td>
+                                <a href="admin_edit_user.php?id=<?php echo $user['id']; ?>" class="action-btn edit-btn">Edit</a>
+                                <form method="post" action="admin_users.php" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                    <input type="hidden" name="delete_user_id" value="<?php echo $user['id']; ?>">
+                                    <button type="submit" class="action-btn delete-btn">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 <?php endif; ?>
