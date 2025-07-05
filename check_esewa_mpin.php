@@ -24,6 +24,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
 $esewa_id = $_SESSION['esewa_id'] ?? null;
 $mpin = $_POST['mpin'] ?? '';
+$booking_id = $_POST['booking_id'] ?? null;
 
 error_log('Processing MPIN check - eSewa ID: ' . $esewa_id . ', MPIN: ' . $mpin);
 
@@ -41,6 +42,9 @@ if ($esewa_id && $mpin) {
         
         if ($row && $row['mpin'] === $mpin) {
             error_log('MPIN verification SUCCESS');
+            if ($booking_id) {
+                $_SESSION['can_confirm_booking'] = $booking_id;
+            }
             echo 'success';
             exit;
         } else {

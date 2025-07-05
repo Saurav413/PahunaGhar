@@ -171,68 +171,10 @@ error_log('eSewa ID in session: ' . ($_SESSION['esewa_id'] ?? 'NOT SET'));
                 <span class="esewa-detail-value status"><?php echo htmlspecialchars(ucfirst($booking['status'])); ?></span>
             </div>
             <a href="esewa_login.php?booking_id=<?php echo $booking_id; ?>" style="color:#10b981;text-decoration:underline;display:block;text-align:center;margin-bottom:18px;font-weight:700;">Back to eSewa Login Page</a>
-            <form id="payForm" method="post" action="#" onsubmit="return false;">
-                <button type="button" class="esewa-pay-btn" id="showMpinModal">Pay Via Esewa</button>
+            <form id="payForm" method="get" action="mpin_esewa.php">
+                <input type="hidden" name="booking_id" value="<?php echo $booking_id; ?>">
+                <button type="submit" class="esewa-pay-btn">Pay Via Esewa</button>
             </form>
-            <div id="mpinModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(30,32,40,0.75);z-index:1000;align-items:center;justify-content:center;">
-                <div style="background:#23272f;padding:36px 32px 28px 32px;border-radius:16px;box-shadow:0 8px 32px rgba(44,62,80,0.18);min-width:320px;max-width:90vw;position:relative;display:flex;flex-direction:column;align-items:center;">
-                    <button onclick="closeMpinModal()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.5rem;color:#b0b3b8;cursor:pointer;">&times;</button>
-                    <div style="font-size:1.25rem;font-weight:700;color:#fff;margin-bottom:18px;">Enter MPIN to Confirm Payment</div>
-                    <input type="password" id="mpinInput" placeholder="MPIN" maxlength="10" style="padding:12px 16px;border-radius:8px;border:1.5px solid #353945;background:#2d323c;color:#f3f4f6;font-size:1.1rem;width:100%;margin-bottom:18px;outline:none;">
-                    <button id="confirmMpinBtn" style="width:100%;background:#8bc34a;color:#23272f;font-weight:900;border:none;border-radius:8px;padding:14px;font-size:1.15rem;cursor:pointer;transition:background 0.2s;">Confirm</button>
-                    <div id="mpinMsg" style="margin-top:14px;font-weight:700;font-size:1.08rem;text-align:center;"></div>
-                </div>
-            </div>
-            <script>
-                function closeMpinModal() {
-                    document.getElementById('mpinModal').style.display = 'none';
-                }
-                document.getElementById('showMpinModal').onclick = function() {
-                    document.getElementById('mpinModal').style.display = 'flex';
-                    document.getElementById('mpinInput').value = '';
-                    document.getElementById('mpinMsg').textContent = '';
-                    document.getElementById('mpinInput').focus();
-                };
-                document.getElementById('confirmMpinBtn').onclick = function() {
-                    var mpin = document.getElementById('mpinInput').value;
-                    var msg = document.getElementById('mpinMsg');
-                    if (!mpin) {
-                        msg.style.color = '#ef4444';
-                        msg.textContent = 'Please enter your MPIN.';
-                        return;
-                    }
-                    // AJAX to check MPIN
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('POST', 'check_esewa_mpin.php', true);
-                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                    xhr.onreadystatechange = function() {
-                        if (xhr.readyState === 4) {
-                            if (xhr.status === 200 && xhr.responseText === 'success') {
-                                // Now update booking status
-                                var xhr2 = new XMLHttpRequest();
-                                xhr2.open('POST', 'update_booking_status.php', true);
-                                xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                                xhr2.onreadystatechange = function() {
-                                    if (xhr2.readyState === 4) {
-                                        if (xhr2.status === 200 && xhr2.responseText === 'success') {
-                                            msg.style.color = '#10b981';
-                                            msg.textContent = 'Payment Successful!';
-                                        } else {
-                                            msg.style.color = '#ef4444';
-                                            msg.textContent = 'Payment succeeded, but failed to update booking status.';
-                                        }
-                                    }
-                                };
-                                xhr2.send('booking_id=<?php echo $booking_id; ?>');
-                            } else {
-                                msg.style.color = '#ef4444';
-                                msg.textContent = 'Invalid MPIN. Please try again.';
-                            }
-                        }
-                    };
-                    xhr.send('mpin=' + encodeURIComponent(mpin));
-                };
-            </script>
         <?php else: ?>
             <div class="esewa-detail-row">
                 <span class="esewa-detail-label" style="color:#ef4444;">Error</span>

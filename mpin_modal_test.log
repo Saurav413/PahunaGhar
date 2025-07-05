@@ -1,3 +1,6 @@
 [05-Jul-2025 06:28:19 Europe/Berlin] PHP Warning:  Undefined array key "REQUEST_METHOD" in /Applications/XAMPP/xamppfiles/htdocs/PahunaGhar-main/test_mpin_modal.php on line 35
 [05-Jul-2025 06:28:19 Europe/Berlin] PHP Warning:  Undefined array key "REQUEST_METHOD" in /Applications/XAMPP/xamppfiles/htdocs/PahunaGhar-main/test_mpin_modal.php on line 67
 [05-Jul-2025 06:28:19 Europe/Berlin] PHP Warning:  Undefined array key "REQUEST_METHOD" in /Applications/XAMPP/xamppfiles/htdocs/PahunaGhar-main/test_mpin_modal.php on line 99
+[05-Jul-2025 06:40:10 Europe/Berlin] PHP Warning:  Undefined array key "REQUEST_METHOD" in /Applications/XAMPP/xamppfiles/htdocs/PahunaGhar-main/test_mpin_modal.php on line 35
+[05-Jul-2025 06:40:10 Europe/Berlin] PHP Warning:  Undefined array key "REQUEST_METHOD" in /Applications/XAMPP/xamppfiles/htdocs/PahunaGhar-main/test_mpin_modal.php on line 67
+[05-Jul-2025 06:40:10 Europe/Berlin] PHP Warning:  Undefined array key "REQUEST_METHOD" in /Applications/XAMPP/xamppfiles/htdocs/PahunaGhar-main/test_mpin_modal.php on line 99

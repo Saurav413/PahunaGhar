@@ -39,7 +39,7 @@ if (isset($_POST['pay_booking_id'])) {
 }
 
 try {
-    $stmt = $pdo->prepare("SELECT * FROM bookings WHERE user_id = ? ORDER BY created_at DESC");
+    $stmt = $pdo->prepare("SELECT * FROM bookings WHERE user_id = ? AND status IN ('pending', 'available', 'confirmed') ORDER BY FIELD(status, 'pending', 'available', 'confirmed'), created_at DESC");
     $stmt->execute([$user_id]);
     $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
@@ -245,7 +245,16 @@ try {
                             <td><?php echo htmlspecialchars($booking['check_in_date']); ?></td>
                             <td><?php echo htmlspecialchars($booking['check_out_date']); ?></td>
                             <td><?php echo htmlspecialchars($booking['guests']); ?></td>
-                            <td><?php echo htmlspecialchars(ucfirst($booking['status'])); ?></td>
+                            <td>
+                                <?php
+                                    $status = strtolower(trim($booking['status']));
+                                    if ($status === 'confirmed') {
+                                        echo '<span style="color:#10b981;font-weight:700;">Confirmed</span>';
+                                    } else {
+                                        echo htmlspecialchars(ucfirst($booking['status']));
+                                    }
+                                ?>
+                            </td>
                             <td>$<?php echo htmlspecialchars(number_format($booking['total_price'], 2)); ?></td>
                             <td><?php echo htmlspecialchars($booking['created_at']); ?></td>
                             <td>

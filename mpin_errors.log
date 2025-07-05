@@ -1,0 +1,352 @@
+[05-Jul-2025 07:30:20 Europe/Berlin] === eSewa MPIN Check Debug ===
+[05-Jul-2025 07:30:20 Europe/Berlin] Session eSewa ID: 9824004077
+[05-Jul-2025 07:30:20 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:30:20 Europe/Berlin] POST mpin: 5470
+[05-Jul-2025 07:30:20 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:30:20 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[05-Jul-2025 07:30:20 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:30:20 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[05-Jul-2025 07:30:20 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:30:20 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:32:11 Europe/Berlin] === eSewa MPIN Check Debug ===
+[05-Jul-2025 07:32:11 Europe/Berlin] Session eSewa ID: 9824004077
+[05-Jul-2025 07:32:11 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:32:11 Europe/Berlin] POST mpin: 5470
+[05-Jul-2025 07:32:11 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:32:11 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[05-Jul-2025 07:32:11 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:32:11 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[05-Jul-2025 07:32:11 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:32:11 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:32:26 Europe/Berlin] === Khalti MPIN Check Debug ===
+[05-Jul-2025 07:32:26 Europe/Berlin] Session Khalti ID: 9824004077
+[05-Jul-2025 07:32:26 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:32:26 Europe/Berlin] POST mpin: 2020
+[05-Jul-2025 07:32:26 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:32:26 Europe/Berlin] Processing MPIN check - Khalti ID: 9824004077, MPIN: 2020
+[05-Jul-2025 07:32:26 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:32:26 Europe/Berlin] Stored MPIN: 2020, Input MPIN: 2020
+[05-Jul-2025 07:32:26 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:32:26 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:34:06 Europe/Berlin] === eSewa MPIN Check Debug ===
+[05-Jul-2025 07:34:06 Europe/Berlin] Session eSewa ID: 9824004077
+[05-Jul-2025 07:34:06 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:34:06 Europe/Berlin] POST mpin: 5470
+[05-Jul-2025 07:34:06 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:34:06 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[05-Jul-2025 07:34:06 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:34:06 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[05-Jul-2025 07:34:06 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:34:06 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:34:18 Europe/Berlin] === eSewa MPIN Check Debug ===
+[05-Jul-2025 07:34:18 Europe/Berlin] Session eSewa ID: 9824004077
+[05-Jul-2025 07:34:18 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:34:18 Europe/Berlin] POST mpin: 5470
+[05-Jul-2025 07:34:18 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:34:18 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[05-Jul-2025 07:34:18 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:34:18 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[05-Jul-2025 07:34:18 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:34:18 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:34:46 Europe/Berlin] === eSewa MPIN Check Debug ===
+[05-Jul-2025 07:34:46 Europe/Berlin] Session eSewa ID: 9824004077
+[05-Jul-2025 07:34:46 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:34:46 Europe/Berlin] POST mpin: 5470
+[05-Jul-2025 07:34:46 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:34:46 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[05-Jul-2025 07:34:46 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:34:46 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[05-Jul-2025 07:34:46 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:34:46 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:34:47 Europe/Berlin] === eSewa MPIN Check Debug ===
+[05-Jul-2025 07:34:47 Europe/Berlin] Session eSewa ID: 9824004077
+[05-Jul-2025 07:34:47 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:34:47 Europe/Berlin] POST mpin: 5470
+[05-Jul-2025 07:34:47 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:34:47 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[05-Jul-2025 07:34:47 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:34:47 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[05-Jul-2025 07:34:47 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:34:47 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:34:47 Europe/Berlin] === eSewa MPIN Check Debug ===
+[05-Jul-2025 07:34:47 Europe/Berlin] Session eSewa ID: 9824004077
+[05-Jul-2025 07:34:47 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:34:47 Europe/Berlin] POST mpin: 5470
+[05-Jul-2025 07:34:47 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:34:47 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[05-Jul-2025 07:34:47 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:34:47 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[05-Jul-2025 07:34:47 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:34:47 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:34:47 Europe/Berlin] === eSewa MPIN Check Debug ===
+[05-Jul-2025 07:34:47 Europe/Berlin] Session eSewa ID: 9824004077
+[05-Jul-2025 07:34:47 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:34:47 Europe/Berlin] POST mpin: 5470
+[05-Jul-2025 07:34:47 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:34:47 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[05-Jul-2025 07:34:47 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:34:47 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[05-Jul-2025 07:34:47 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:34:47 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:34:48 Europe/Berlin] === eSewa MPIN Check Debug ===
+[05-Jul-2025 07:34:48 Europe/Berlin] Session eSewa ID: 9824004077
+[05-Jul-2025 07:34:48 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:34:48 Europe/Berlin] POST mpin: 5470
+[05-Jul-2025 07:34:48 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:34:48 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[05-Jul-2025 07:34:48 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:34:48 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[05-Jul-2025 07:34:48 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:34:48 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:34:48 Europe/Berlin] === eSewa MPIN Check Debug ===
+[05-Jul-2025 07:34:48 Europe/Berlin] Session eSewa ID: 9824004077
+[05-Jul-2025 07:34:48 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:34:48 Europe/Berlin] POST mpin: 5470
+[05-Jul-2025 07:34:48 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:34:48 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[05-Jul-2025 07:34:48 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:34:48 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[05-Jul-2025 07:34:48 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:34:48 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:34:48 Europe/Berlin] === eSewa MPIN Check Debug ===
+[05-Jul-2025 07:34:48 Europe/Berlin] Session eSewa ID: 9824004077
+[05-Jul-2025 07:34:48 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:34:48 Europe/Berlin] POST mpin: 5470
+[05-Jul-2025 07:34:48 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:34:48 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[05-Jul-2025 07:34:48 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:34:48 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[05-Jul-2025 07:34:48 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:34:48 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:34:49 Europe/Berlin] === eSewa MPIN Check Debug ===
+[05-Jul-2025 07:34:49 Europe/Berlin] Session eSewa ID: 9824004077
+[05-Jul-2025 07:34:49 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:34:49 Europe/Berlin] POST mpin: 5470
+[05-Jul-2025 07:34:49 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:34:49 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[05-Jul-2025 07:34:49 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:34:49 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[05-Jul-2025 07:34:49 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:34:49 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:34:49 Europe/Berlin] === eSewa MPIN Check Debug ===
+[05-Jul-2025 07:34:49 Europe/Berlin] Session eSewa ID: 9824004077
+[05-Jul-2025 07:34:49 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:34:49 Europe/Berlin] POST mpin: 5470
+[05-Jul-2025 07:34:49 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:34:49 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[05-Jul-2025 07:34:49 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:34:49 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[05-Jul-2025 07:34:49 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:34:49 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:34:49 Europe/Berlin] === eSewa MPIN Check Debug ===
+[05-Jul-2025 07:34:49 Europe/Berlin] Session eSewa ID: 9824004077
+[05-Jul-2025 07:34:49 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:34:49 Europe/Berlin] POST mpin: 5470
+[05-Jul-2025 07:34:49 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:34:49 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[05-Jul-2025 07:34:49 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:34:49 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[05-Jul-2025 07:34:49 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:34:49 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:36:20 Europe/Berlin] === eSewa MPIN Check Debug ===
+[05-Jul-2025 07:36:20 Europe/Berlin] Session eSewa ID: 9824004077
+[05-Jul-2025 07:36:20 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:36:20 Europe/Berlin] POST mpin: 5470
+[05-Jul-2025 07:36:20 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:36:20 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[05-Jul-2025 07:36:20 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:36:20 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[05-Jul-2025 07:36:20 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:36:20 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:39:26 Europe/Berlin] === eSewa MPIN Check Debug ===
+[05-Jul-2025 07:39:26 Europe/Berlin] Session eSewa ID: 9824004077
+[05-Jul-2025 07:39:26 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:39:26 Europe/Berlin] POST mpin: 5470
+[05-Jul-2025 07:39:26 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:39:26 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[05-Jul-2025 07:39:26 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:39:26 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[05-Jul-2025 07:39:26 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:39:26 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:40:43 Europe/Berlin] === Khalti MPIN Check Debug ===
+[05-Jul-2025 07:40:43 Europe/Berlin] Session Khalti ID: 9824004077
+[05-Jul-2025 07:40:43 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:40:43 Europe/Berlin] POST mpin: 2020
+[05-Jul-2025 07:40:43 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:40:43 Europe/Berlin] Processing MPIN check - Khalti ID: 9824004077, MPIN: 2020
+[05-Jul-2025 07:40:43 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:40:43 Europe/Berlin] Stored MPIN: 2020, Input MPIN: 2020
+[05-Jul-2025 07:40:43 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:40:43 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:42:12 Europe/Berlin] === Khalti MPIN Check Debug ===
+[05-Jul-2025 07:42:12 Europe/Berlin] Session Khalti ID: 9824004077
+[05-Jul-2025 07:42:12 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:42:12 Europe/Berlin] POST mpin: 2020
+[05-Jul-2025 07:42:12 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:42:12 Europe/Berlin] Processing MPIN check - Khalti ID: 9824004077, MPIN: 2020
+[05-Jul-2025 07:42:12 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:42:12 Europe/Berlin] Stored MPIN: 2020, Input MPIN: 2020
+[05-Jul-2025 07:42:12 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:42:12 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:48:50 Europe/Berlin] === Khalti MPIN Check Debug ===
+[05-Jul-2025 07:48:50 Europe/Berlin] Session Khalti ID: 9824004077
+[05-Jul-2025 07:48:50 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:48:50 Europe/Berlin] POST mpin: 2020
+[05-Jul-2025 07:48:50 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:48:50 Europe/Berlin] Processing MPIN check - Khalti ID: 9824004077, MPIN: 2020
+[05-Jul-2025 07:48:50 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:48:50 Europe/Berlin] Stored MPIN: 2020, Input MPIN: 2020
+[05-Jul-2025 07:48:50 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:48:50 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:52:20 Europe/Berlin] === Khalti MPIN Check Debug ===
+[05-Jul-2025 07:52:20 Europe/Berlin] Session Khalti ID: 9824004077
+[05-Jul-2025 07:52:20 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:52:20 Europe/Berlin] POST mpin: 5470
+[05-Jul-2025 07:52:20 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:52:20 Europe/Berlin] Processing MPIN check - Khalti ID: 9824004077, MPIN: 5470
+[05-Jul-2025 07:52:20 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:52:20 Europe/Berlin] Stored MPIN: 2020, Input MPIN: 5470
+[05-Jul-2025 07:52:20 Europe/Berlin] MPIN match: NO
+[05-Jul-2025 07:52:20 Europe/Berlin] MPIN verification FAILED
+[05-Jul-2025 07:52:20 Europe/Berlin] Returning fail
+[05-Jul-2025 07:52:32 Europe/Berlin] === Khalti MPIN Check Debug ===
+[05-Jul-2025 07:52:32 Europe/Berlin] Session Khalti ID: 9824004077
+[05-Jul-2025 07:52:32 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:52:32 Europe/Berlin] POST mpin: 2020
+[05-Jul-2025 07:52:32 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:52:32 Europe/Berlin] Processing MPIN check - Khalti ID: 9824004077, MPIN: 2020
+[05-Jul-2025 07:52:32 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:52:32 Europe/Berlin] Stored MPIN: 2020, Input MPIN: 2020
+[05-Jul-2025 07:52:32 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:52:32 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 07:52:39 Europe/Berlin] === Khalti MPIN Check Debug ===
+[05-Jul-2025 07:52:39 Europe/Berlin] Session Khalti ID: 9824004077
+[05-Jul-2025 07:52:39 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 07:52:39 Europe/Berlin] POST mpin: 2020
+[05-Jul-2025 07:52:39 Europe/Berlin] Request method: POST
+[05-Jul-2025 07:52:39 Europe/Berlin] Processing MPIN check - Khalti ID: 9824004077, MPIN: 2020
+[05-Jul-2025 07:52:39 Europe/Berlin] Database query result: User found
+[05-Jul-2025 07:52:39 Europe/Berlin] Stored MPIN: 2020, Input MPIN: 2020
+[05-Jul-2025 07:52:39 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 07:52:39 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 08:02:01 Europe/Berlin] === Khalti MPIN Check Debug ===
+[05-Jul-2025 08:02:01 Europe/Berlin] Session Khalti ID: 9824004077
+[05-Jul-2025 08:02:01 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 08:02:01 Europe/Berlin] POST mpin: 2020
+[05-Jul-2025 08:02:01 Europe/Berlin] Request method: POST
+[05-Jul-2025 08:02:01 Europe/Berlin] Processing MPIN check - Khalti ID: 9824004077, MPIN: 2020
+[05-Jul-2025 08:02:01 Europe/Berlin] Database query result: User found
+[05-Jul-2025 08:02:01 Europe/Berlin] Stored MPIN: 2020, Input MPIN: 2020
+[05-Jul-2025 08:02:01 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 08:02:01 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 08:02:10 Europe/Berlin] === Khalti MPIN Check Debug ===
+[05-Jul-2025 08:02:10 Europe/Berlin] Session Khalti ID: 9824004077
+[05-Jul-2025 08:02:10 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 08:02:10 Europe/Berlin] POST mpin: 2020
+[05-Jul-2025 08:02:10 Europe/Berlin] Request method: POST
+[05-Jul-2025 08:02:10 Europe/Berlin] Processing MPIN check - Khalti ID: 9824004077, MPIN: 2020
+[05-Jul-2025 08:02:10 Europe/Berlin] Database query result: User found
+[05-Jul-2025 08:02:10 Europe/Berlin] Stored MPIN: 2020, Input MPIN: 2020
+[05-Jul-2025 08:02:10 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 08:02:10 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 08:06:09 Europe/Berlin] === Khalti MPIN Check Debug ===
+[05-Jul-2025 08:06:09 Europe/Berlin] Session Khalti ID: 9824004077
+[05-Jul-2025 08:06:09 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 08:06:09 Europe/Berlin] POST mpin: 2020
+[05-Jul-2025 08:06:09 Europe/Berlin] Request method: POST
+[05-Jul-2025 08:06:09 Europe/Berlin] Processing MPIN check - Khalti ID: 9824004077, MPIN: 2020
+[05-Jul-2025 08:06:09 Europe/Berlin] Database query result: User found
+[05-Jul-2025 08:06:09 Europe/Berlin] Stored MPIN: 2020, Input MPIN: 2020
+[05-Jul-2025 08:06:09 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 08:06:09 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 08:06:09 Europe/Berlin] === Update Booking Status Debug ===
+[05-Jul-2025 08:06:09 Europe/Berlin] Session user_id: 6
+[05-Jul-2025 08:06:09 Europe/Berlin] Session can_confirm_booking: 31
+[05-Jul-2025 08:06:09 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 08:06:09 Europe/Berlin] POST booking_id: 31
+[05-Jul-2025 08:06:09 Europe/Berlin] Booking found. Current status: available
+[05-Jul-2025 08:06:09 Europe/Berlin] Update query rowCount: 1
+[05-Jul-2025 08:06:09 Europe/Berlin] Booking status updated to confirmed - SUCCESS
+[05-Jul-2025 08:07:41 Europe/Berlin] === Khalti MPIN Check Debug ===
+[05-Jul-2025 08:07:41 Europe/Berlin] Session Khalti ID: 9824004077
+[05-Jul-2025 08:07:41 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 08:07:41 Europe/Berlin] POST mpin: 2020
+[05-Jul-2025 08:07:41 Europe/Berlin] Request method: POST
+[05-Jul-2025 08:07:41 Europe/Berlin] Processing MPIN check - Khalti ID: 9824004077, MPIN: 2020
+[05-Jul-2025 08:07:41 Europe/Berlin] Database query result: User found
+[05-Jul-2025 08:07:41 Europe/Berlin] Stored MPIN: 2020, Input MPIN: 2020
+[05-Jul-2025 08:07:41 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 08:07:41 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 08:07:41 Europe/Berlin] === Update Booking Status Debug ===
+[05-Jul-2025 08:07:41 Europe/Berlin] Session user_id: 6
+[05-Jul-2025 08:07:41 Europe/Berlin] Session can_confirm_booking: 31
+[05-Jul-2025 08:07:41 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 08:07:41 Europe/Berlin] POST booking_id: 31
+[05-Jul-2025 08:07:41 Europe/Berlin] Booking found. Current status: confirmed
+[05-Jul-2025 08:07:41 Europe/Berlin] Update query rowCount: 0
+[05-Jul-2025 08:07:41 Europe/Berlin] Booking status not updated (possibly already confirmed) - returning fail
+[05-Jul-2025 08:07:41 Europe/Berlin] Returning fail
+[05-Jul-2025 08:22:32 Europe/Berlin] === Khalti MPIN Check Debug ===
+[05-Jul-2025 08:22:32 Europe/Berlin] Session Khalti ID: 9824004077
+[05-Jul-2025 08:22:32 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 08:22:32 Europe/Berlin] POST mpin: 2020
+[05-Jul-2025 08:22:32 Europe/Berlin] Request method: POST
+[05-Jul-2025 08:22:32 Europe/Berlin] Processing MPIN check - Khalti ID: 9824004077, MPIN: 2020
+[05-Jul-2025 08:22:32 Europe/Berlin] Database query result: User found
+[05-Jul-2025 08:22:32 Europe/Berlin] Stored MPIN: 2020, Input MPIN: 2020
+[05-Jul-2025 08:22:32 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 08:22:32 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 08:22:32 Europe/Berlin] === Update Booking Status Debug ===
+[05-Jul-2025 08:22:32 Europe/Berlin] Session user_id: 6
+[05-Jul-2025 08:22:32 Europe/Berlin] Session can_confirm_booking: 32
+[05-Jul-2025 08:22:32 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 08:22:32 Europe/Berlin] POST booking_id: 32
+[05-Jul-2025 08:22:32 Europe/Berlin] Booking found. Current status: available
+[05-Jul-2025 08:22:32 Europe/Berlin] Update query rowCount: 1
+[05-Jul-2025 08:22:32 Europe/Berlin] Booking status updated to confirmed - SUCCESS
+[05-Jul-2025 08:23:10 Europe/Berlin] === eSewa MPIN Check Debug ===
+[05-Jul-2025 08:23:10 Europe/Berlin] Session eSewa ID: 9824004077
+[05-Jul-2025 08:23:10 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 08:23:10 Europe/Berlin] POST mpin: 5470
+[05-Jul-2025 08:23:10 Europe/Berlin] Request method: POST
+[05-Jul-2025 08:23:10 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[05-Jul-2025 08:23:10 Europe/Berlin] Database query result: User found
+[05-Jul-2025 08:23:10 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[05-Jul-2025 08:23:10 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 08:23:10 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 08:24:42 Europe/Berlin] === eSewa MPIN Check Debug ===
+[05-Jul-2025 08:24:42 Europe/Berlin] Session eSewa ID: 9824004077
+[05-Jul-2025 08:24:42 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 08:24:42 Europe/Berlin] POST mpin: 5470
+[05-Jul-2025 08:24:42 Europe/Berlin] Request method: POST
+[05-Jul-2025 08:24:42 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[05-Jul-2025 08:24:42 Europe/Berlin] Database query result: User found
+[05-Jul-2025 08:24:42 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[05-Jul-2025 08:24:42 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 08:24:42 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 08:24:42 Europe/Berlin] === Update Booking Status Debug ===
+[05-Jul-2025 08:24:42 Europe/Berlin] Session user_id: 6
+[05-Jul-2025 08:24:42 Europe/Berlin] Session can_confirm_booking: 32
+[05-Jul-2025 08:24:42 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 08:24:42 Europe/Berlin] POST booking_id: 32
+[05-Jul-2025 08:24:42 Europe/Berlin] Booking found. Current status: available
+[05-Jul-2025 08:24:42 Europe/Berlin] Update query rowCount: 1
+[05-Jul-2025 08:24:42 Europe/Berlin] Booking status updated to confirmed - SUCCESS
+[05-Jul-2025 08:26:15 Europe/Berlin] === eSewa MPIN Check Debug ===
+[05-Jul-2025 08:26:15 Europe/Berlin] Session eSewa ID: 9824004077
+[05-Jul-2025 08:26:15 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 08:26:15 Europe/Berlin] POST mpin: 5470
+[05-Jul-2025 08:26:15 Europe/Berlin] Request method: POST
+[05-Jul-2025 08:26:15 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[05-Jul-2025 08:26:15 Europe/Berlin] Database query result: User found
+[05-Jul-2025 08:26:15 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[05-Jul-2025 08:26:15 Europe/Berlin] MPIN match: YES
+[05-Jul-2025 08:26:15 Europe/Berlin] MPIN verification SUCCESS
+[05-Jul-2025 08:26:15 Europe/Berlin] === Update Booking Status Debug ===
+[05-Jul-2025 08:26:15 Europe/Berlin] Session user_id: 6
+[05-Jul-2025 08:26:15 Europe/Berlin] Session can_confirm_booking: 33
+[05-Jul-2025 08:26:15 Europe/Berlin] Session logged_in: 1
+[05-Jul-2025 08:26:15 Europe/Berlin] POST booking_id: 33
+[05-Jul-2025 08:26:15 Europe/Berlin] Booking found. Current status: available
+[05-Jul-2025 08:26:15 Europe/Berlin] Update query rowCount: 1
+[05-Jul-2025 08:26:15 Europe/Berlin] Booking status updated to confirmed - SUCCESS
