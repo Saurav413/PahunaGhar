@@ -29,16 +29,18 @@ if ($booking_id > 0) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input_id = $_POST['esewa_id'] ?? '';
-    $input_pass = $_POST['esewa_pass'] ?? '';
-    // Check against database
+    $input_password = $_POST['esewa_password'] ?? '';
+    
+    // Check against database using ID and password only
     $stmt = $pdo->prepare("SELECT * FROM esewa_users WHERE esewa_id = ? AND password = ?");
-    $stmt->execute([$input_id, $input_pass]);
+    $stmt->execute([$input_id, $input_password]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($user) {
+        $_SESSION['esewa_id'] = $input_id;
         header('Location: esewa.php?booking_id=' . $booking_id);
         exit;
     } else {
-        $error = 'Invalid eSewa ID or Password/MPIN.';
+        $error = 'Invalid eSewa ID or Password.';
     }
 }
 ?>
@@ -267,7 +269,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="esewa-form-title">Sign in to your account</div>
                 <form class="esewa-form" method="post">
                     <input type="text" class="esewa-input" name="esewa_id" placeholder="eSewa ID" required>
-                    <input type="password" class="esewa-input" name="esewa_pass" placeholder="Password/MPIN" required>
+                    <input type="password" class="esewa-input" name="esewa_password" placeholder="Password" required>
                     <button type="submit" class="esewa-btn">LOGIN</button>
                     <?php if (!empty($error)): ?>
                         <div style="color:#ef4444;text-align:center;font-weight:700;margin-top:10px;"> <?php echo htmlspecialchars($error); ?> </div>

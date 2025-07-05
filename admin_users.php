@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
 // Fetch all users
 $allUsers = [];
 try {
-    $stmt = $user_pdo->query('SELECT id, name, email, user_type, created_at FROM register_form ORDER BY created_at DESC');
+    $stmt = $user_pdo->query('SELECT id, name, email, user_type, created_at FROM user_register_form ORDER BY created_at DESC');
     $allUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
     $allUsers = [];
@@ -179,6 +179,7 @@ try {
         <div class="admin-navbar-left">
             <a href="admin_dashboard.php" class="admin-navbar-link">Dashboard</a>
             <a href="admin_users.php" class="admin-navbar-link active">Users</a>
+            <a href="admin_manage_admins.php" class="admin-navbar-link">Admins</a>
             <a href="admin_bookings.php" class="admin-navbar-link">Bookings</a>
             <a href="admin_reviews.php" class="admin-navbar-link">Reviews</a>
             <a href="admin_hotels.php" class="admin-navbar-link">Hotels</a>

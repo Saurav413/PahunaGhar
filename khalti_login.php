@@ -28,17 +28,18 @@ if ($booking_id > 0) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input_id = $_POST['khalti_id'] ?? '';
-    $input_pass = $_POST['khalti_pass'] ?? '';
-    // Check against database
+    $input_password = $_POST['khalti_password'] ?? '';
+    
+    // Check against database using ID and password only
     $stmt = $pdo->prepare("SELECT * FROM khalti_users WHERE khalti_id = ? AND password = ?");
-    $stmt->execute([$input_id, $input_pass]);
+    $stmt->execute([$input_id, $input_password]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($user) {
         $_SESSION['khalti_id'] = $input_id;
         header('Location: khalti.php?booking_id=' . $booking_id);
         exit;
     } else {
-        $error = 'Invalid Khalti ID or Password/MPIN.';
+        $error = 'Invalid Khalti ID or Password.';
     }
 }
 ?>
@@ -250,7 +251,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="khalti-form-title">Sign in to your account</div>
                 <form class="khalti-form" method="post">
                     <input type="text" class="khalti-input" name="khalti_id" placeholder="Khalti ID" required>
-                    <input type="password" class="khalti-input" name="khalti_pass" placeholder="Password/MPIN" required>
+                    <input type="password" class="khalti-input" name="khalti_password" placeholder="Password" required>
                     <button type="submit" class="khalti-btn">LOGIN</button>
                     <?php if (!empty($error)): ?>
                         <div style="color:#ef4444;text-align:center;font-weight:700;margin-top:10px;"> <?php echo htmlspecialchars($error); ?> </div>

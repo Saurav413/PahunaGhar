@@ -31,7 +31,7 @@ try {
         SELECT r.*, h.name AS hotel_name, u.name AS user_name
         FROM reviews r
         JOIN hotels h ON r.hotel_id = h.id
-        JOIN register_form u ON r.user_id = u.id
+        JOIN user_register_form u ON r.user_id = u.id
         ORDER BY r.review_date DESC
     ');
     $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);

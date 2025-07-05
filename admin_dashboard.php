@@ -12,7 +12,7 @@ $isAdmin = true; // Now properly authenticated
 
 // Get statistics
 try {
-    $userCount = $user_pdo->query("SELECT COUNT(*) FROM register_form")->fetchColumn();
+    $userCount = $user_pdo->query("SELECT COUNT(*) FROM user_register_form")->fetchColumn();
     $bookingCount = $user_pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
     $reviewCount = $user_pdo->query("SELECT COUNT(*) FROM reviews")->fetchColumn();
     $hotelCount = $user_pdo->query("SELECT COUNT(*) FROM hotels")->fetchColumn();
@@ -45,7 +45,7 @@ try {
         SELECT r.*, h.name AS hotel_name, u.name AS user_name
         FROM reviews r
         JOIN hotels h ON r.hotel_id = h.id
-        JOIN register_form u ON r.user_id = u.id
+        JOIN user_register_form u ON r.user_id = u.id
         ORDER BY r.review_date DESC
         LIMIT 5
     ');
@@ -57,7 +57,7 @@ try {
 // Fetch all users for Manage Users section
 $allUsers = [];
 try {
-    $stmt = $user_pdo->query('SELECT id, name, email, user_type, created_at FROM register_form ORDER BY created_at DESC');
+    $stmt = $user_pdo->query('SELECT id, name, email, user_type, created_at FROM user_register_form ORDER BY created_at DESC');
     $allUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
     $allUsers = [];
@@ -69,7 +69,7 @@ try {
     $stmt = $user_pdo->query('
         SELECT b.id, u.name AS user_name, h.name AS hotel_name, b.check_in_date, b.check_out_date, b.status, b.created_at
         FROM bookings b
-        JOIN register_form u ON b.user_id = u.id
+        JOIN user_register_form u ON b.user_id = u.id
         JOIN hotels h ON b.hotel_id = h.id
         ORDER BY b.created_at DESC
         LIMIT 10
@@ -86,7 +86,7 @@ try {
         SELECT r.id, h.name AS hotel_name, u.name AS user_name, r.rating, r.comment, r.review_date
         FROM reviews r
         JOIN hotels h ON r.hotel_id = h.id
-        JOIN register_form u ON r.user_id = u.id
+        JOIN user_register_form u ON r.user_id = u.id
         ORDER BY r.review_date DESC
         LIMIT 10
     ');
@@ -162,6 +162,8 @@ try {
                 <h2 class="section-title">
                     Manage Users
                     <a href="admin_users.php" class="btn btn-primary">View All</a>
+                    <a href="admin_register.php" class="btn btn-secondary">Create Admin</a>
+                    <a href="admin_manage_admins.php" class="btn btn-secondary">Manage Admins</a>
                 </h2>
                 <div id="recentUsers">
                     <?php if (empty($allUsers)): ?>

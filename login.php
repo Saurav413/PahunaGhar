@@ -25,17 +25,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Email and password are required.';
     } else {
         try {
-            // Check if user exists and verify password
-            $stmt = $user_pdo->prepare('SELECT id, name, email, password, user_type FROM register_form WHERE email = ?');
+            // First, check if admin exists and verify password
+            $stmt = $user_pdo->prepare('SELECT id, name, email, password, admin_role, is_active FROM admin_register_form WHERE email = ?');
             $stmt->execute([$email]);
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            $admin = $stmt->fetch(PDO::FETCH_ASSOC);
             
-            if ($user && password_verify($password, $user['password'])) {
-                // Restrict admin login to only the main admin account
-                if ($user['user_type'] === 'admin' && strtolower($user['email']) !== 'admin@pahunaghar.com') {
-                    $error = 'Only the main admin account can log in as admin.';
+            if ($admin && password_verify($password, $admin['password'])) {
+                // Check if admin account is active
+                if (!$admin['is_active']) {
+                    $error = 'Admin account is deactivated. Please contact super admin.';
                 } else {
-                    // Login successful
+                    // Update last login time
+                    $updateStmt = $user_pdo->prepare('UPDATE admin_register_form SET last_login = CURRENT_TIMESTAMP WHERE id = ?');
+                    $updateStmt->execute([$admin['id']]);
+                    
+                    // Login successful - Admin login
+                    $_SESSION['admin_id'] = $admin['id'];
+                    $_SESSION['admin_name'] = $admin['name'];
+                    $_SESSION['admin_email'] = $admin['email'];
+                    $_SESSION['admin_role'] = $admin['admin_role'];
+                    $_SESSION['user_id'] = $admin['id']; // For compatibility
+                    $_SESSION['user_name'] = $admin['name']; // For compatibility
+                    $_SESSION['user_email'] = $admin['email']; // For compatibility
+                    $_SESSION['user_type'] = 'admin'; // For compatibility
+                    $_SESSION['logged_in'] = true;
+                    
+                    $success = 'Admin login successful! Welcome back, ' . $admin['name'] . '.';
+                    
+                    // Redirect to admin dashboard
+                    header('Location: admin_dashboard.php');
+                    exit;
+                }
+            } else {
+                // If not admin, check regular user
+                $stmt = $user_pdo->prepare('SELECT id, name, email, password, user_type FROM user_register_form WHERE email = ?');
+                $stmt->execute([$email]);
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                if ($user && password_verify($password, $user['password'])) {
+                    // Login successful - Regular user login
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['user_name'] = $user['name'];
                     $_SESSION['user_email'] = $user['email'];
@@ -56,12 +84,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         }
                     }
                     exit;
-                }
-            } else {
-                if (!$user) {
-                    $error = 'Incorrect email. Please try again.';
                 } else {
-                    $error = 'Password verification failed.';
+                    if (!$admin && !$user) {
+                        $error = 'Account not found. Please check your email.';
+                    } else {
+                        $error = 'Password verification failed.';
+                    }
                 }
             }
         } catch (PDOException $e) {
@@ -114,6 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </nav>
     <div class="container login-container">
         <h2 class="login-title">Login to Your Account</h2>
+        <p style="text-align: center; color: #6b7280; margin-bottom: 20px;">Login as a user or administrator</p>
         <form class="login-form login-form-styled" method="post" action="">
             <?php if ($error): ?>
                 <div class="login-error"><?php echo $error; ?></div>
@@ -122,8 +151,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="login-success"><?php echo $success; ?></div>
             <?php endif; ?>
             
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required placeholder="you@example.com" value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email" value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>">
 
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required placeholder="Password">
@@ -131,6 +160,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit" class="login-btn">Login</button>
         </form>
         <p class="login-register">Don't have an account? <a href="register.php" class="register-link">Register</a></p>
+        <p class="login-register" style="margin-top: 10px; font-size: 0.9em; color: #6b7280;">
+            Admin? <a href="admin_login.php" class="register-link">Use Admin Login</a>
+        </p>
     </div>
     <footer class="login-footer">
         © 2025 <span class="footer-highlight">PahunaGhar</span>. All rights reserved.

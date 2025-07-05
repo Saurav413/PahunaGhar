@@ -23,7 +23,7 @@ if ($hotel_id > 0) {
         $stmt = $pdo->prepare("
             SELECT r.*, u.name as user_name 
             FROM reviews r 
-            JOIN register_form u ON r.user_id = u.id 
+            JOIN user_register_form u ON r.user_id = u.id 
             WHERE r.hotel_id = ? 
             ORDER BY r.review_date DESC
         ");

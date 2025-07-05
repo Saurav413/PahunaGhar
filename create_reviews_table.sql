@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS reviews (
     rating DECIMAL(2,1) NOT NULL CHECK (rating >= 1 AND rating <= 5),
     comment TEXT NOT NULL,
     review_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES register_form(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES user_register_form(id) ON DELETE CASCADE,
     FOREIGN KEY (hotel_id) REFERENCES hotels(id) ON DELETE CASCADE,
     UNIQUE KEY unique_user_hotel_review (user_id, hotel_id)
 );

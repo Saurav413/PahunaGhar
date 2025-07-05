@@ -1,0 +1,6 @@
+[05-Jul-2025 06:22:21 Europe/Berlin] PHP Warning:  Undefined array key "REQUEST_METHOD" in /Applications/XAMPP/xamppfiles/htdocs/PahunaGhar-main/test_payment_login.php on line 35
+[05-Jul-2025 06:22:21 Europe/Berlin] PHP Warning:  Undefined array key "REQUEST_METHOD" in /Applications/XAMPP/xamppfiles/htdocs/PahunaGhar-main/test_payment_login.php on line 59
+[05-Jul-2025 06:22:21 Europe/Berlin] PHP Warning:  Undefined array key "REQUEST_METHOD" in /Applications/XAMPP/xamppfiles/htdocs/PahunaGhar-main/test_payment_login.php on line 83
+[05-Jul-2025 06:24:48 Europe/Berlin] PHP Warning:  Undefined array key "REQUEST_METHOD" in /Applications/XAMPP/xamppfiles/htdocs/PahunaGhar-main/test_payment_login.php on line 35
+[05-Jul-2025 06:24:48 Europe/Berlin] PHP Warning:  Undefined array key "REQUEST_METHOD" in /Applications/XAMPP/xamppfiles/htdocs/PahunaGhar-main/test_payment_login.php on line 58
+[05-Jul-2025 06:24:48 Europe/Berlin] PHP Warning:  Undefined array key "REQUEST_METHOD" in /Applications/XAMPP/xamppfiles/htdocs/PahunaGhar-main/test_payment_login.php on line 81

@@ -1,7 +1,7 @@
 <?php
 // Database configuration
 $host = 'localhost';
-$dbname = 'PahunaGhar';
+$dbname = 'pahunaghar'; // Changed to lowercase to match database name
 $username = 'root';
 $password = '';
 

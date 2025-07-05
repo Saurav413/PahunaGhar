@@ -365,7 +365,7 @@ function getRecentUsers() {
     global $user_pdo;
     
     try {
-        $stmt = $user_pdo->query("SELECT id, name, email, user_type FROM register_form ORDER BY id DESC LIMIT 5");
+        $stmt = $user_pdo->query("SELECT id, name, email, user_type FROM user_register_form ORDER BY id DESC LIMIT 5");
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
         echo json_encode(['success' => true, 'users' => $users]);
@@ -423,7 +423,7 @@ function deleteUser() {
         return;
     }
     try {
-        $stmt = $user_pdo->prepare('DELETE FROM register_form WHERE id = ?');
+        $stmt = $user_pdo->prepare('DELETE FROM user_register_form WHERE id = ?');
         $stmt->execute([$userId]);
         echo json_encode(['success' => true]);
     } catch (Exception $e) {
@@ -440,7 +440,7 @@ function updateUserType() {
         return;
     }
     try {
-        $stmt = $user_pdo->prepare('UPDATE register_form SET user_type = ? WHERE id = ?');
+        $stmt = $user_pdo->prepare('UPDATE user_register_form SET user_type = ? WHERE id = ?');
         $stmt->execute([$userType, $userId]);
         echo json_encode(['success' => true]);
     } catch (Exception $e) {

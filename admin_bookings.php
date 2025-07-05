@@ -34,7 +34,7 @@ if (isset($_POST['booking_id']) && isset($_POST['status'])) {
 
             if ($status === 'confirmed') {
                 // Fetch user email and booking details
-                $stmt = $pdo->prepare("SELECT u.email, u.name, b.hotel_name, b.check_in_date, b.check_out_date FROM bookings b LEFT JOIN register_form u ON b.user_id = u.id WHERE b.id = ?");
+                $stmt = $pdo->prepare("SELECT u.email, u.name, b.hotel_name, b.check_in_date, b.check_out_date FROM bookings b LEFT JOIN user_register_form u ON b.user_id = u.id WHERE b.id = ?");
                 $stmt->execute([$booking_id]);
                 $bookingInfo = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -86,7 +86,7 @@ if (isset($_POST['delete_id'])) {
 
 // Get all bookings
 try {
-    $stmt = $pdo->query("SELECT b.*, u.name as user_name, u.email as user_email FROM bookings b LEFT JOIN register_form u ON b.user_id = u.id ORDER BY b.created_at DESC");
+    $stmt = $pdo->query("SELECT b.*, u.name as user_name, u.email as user_email FROM bookings b LEFT JOIN user_register_form u ON b.user_id = u.id ORDER BY b.created_at DESC");
     $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     $bookings = [];

@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         try {
             // Check if email already exists
-            $stmt = $user_pdo->prepare('SELECT id FROM register_form WHERE email = ?');
+            $stmt = $user_pdo->prepare('SELECT id FROM user_register_form WHERE email = ?');
             $stmt->execute([$email]);
             if ($stmt->fetch()) {
                 $error = 'Email already registered.';
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Hash password
                 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
                 // Insert user with default user_type 'customer'
-                $stmt = $user_pdo->prepare('INSERT INTO register_form (name, email, password, user_type) VALUES (?, ?, ?, ?)');
+                $stmt = $user_pdo->prepare('INSERT INTO user_register_form (name, email, password, user_type) VALUES (?, ?, ?, ?)');
                 if ($stmt->execute([$name, $email, $hashed_password, 'customer'])) {
                     // Set success message in session and redirect to login page
                     $_SESSION['registration_success'] = 'Registration successful! Please login with your new account.';
