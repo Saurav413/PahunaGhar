@@ -13,6 +13,23 @@ $bookings = [];
 $error = '';
 $success = '';
 
+// Handle error messages from review page
+if (isset($_GET['error'])) {
+    switch ($_GET['error']) {
+        case 'booking_not_confirmed':
+            $error = 'You can only write reviews for confirmed bookings.';
+            break;
+        case 'booking_validation_error':
+            $error = 'There was an error validating your booking. Please try again.';
+            break;
+        case 'invalid_booking':
+            $error = 'Invalid booking information. Please try again.';
+            break;
+        default:
+            $error = 'An error occurred. Please try again.';
+    }
+}
+
 // Handle booking cancellation
 if (isset($_POST['cancel_booking_id'])) {
     $cancel_id = (int)$_POST['cancel_booking_id'];
@@ -258,13 +275,19 @@ try {
                             <td>$<?php echo htmlspecialchars(number_format($booking['total_price'], 2)); ?></td>
                             <td><?php echo htmlspecialchars($booking['created_at']); ?></td>
                             <td>
-                                <?php if (isset($user_reviews[$booking['hotel_id']])): ?>
-                                    <div class="review-status">
-                                        <span class="reviewed-badge">Reviewed ⭐ <?php echo htmlspecialchars($user_reviews[$booking['hotel_id']]['rating']); ?></span>
-                                        <a href="submit_review.php?hotel_id=<?php echo $booking['hotel_id']; ?>&booking_id=<?php echo $booking['id']; ?>" class="review-btn update-review">Update Review</a>
-                                    </div>
+                                <?php 
+                                $status = strtolower(trim($booking['status']));
+                                if ($status === 'confirmed'): 
+                                    if (isset($user_reviews[$booking['hotel_id']])): ?>
+                                        <div class="review-status">
+                                            <span class="reviewed-badge">Reviewed ⭐ <?php echo htmlspecialchars($user_reviews[$booking['hotel_id']]['rating']); ?></span>
+                                            <a href="submit_review.php?hotel_id=<?php echo $booking['hotel_id']; ?>&booking_id=<?php echo $booking['id']; ?>" class="review-btn update-review">Update Review</a>
+                                        </div>
+                                    <?php else: ?>
+                                        <a href="submit_review.php?hotel_id=<?php echo $booking['hotel_id']; ?>&booking_id=<?php echo $booking['id']; ?>" class="review-btn">Write Review</a>
+                                    <?php endif; ?>
                                 <?php else: ?>
-                                    <a href="submit_review.php?hotel_id=<?php echo $booking['hotel_id']; ?>&booking_id=<?php echo $booking['id']; ?>" class="review-btn">Write Review</a>
+                                    <span style="color:#6c757d;font-style:italic;">Available after confirmation</span>
                                 <?php endif; ?>
                             </td>
                             <td>

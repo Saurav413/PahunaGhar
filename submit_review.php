@@ -44,6 +44,32 @@ try {
     // Reviews table might not exist yet, continue
 }
 
+// Validate that the booking is confirmed before allowing review
+$booking_confirmed = false;
+if ($booking_id > 0) {
+    try {
+        $stmt = $pdo->prepare("SELECT status FROM bookings WHERE id = ? AND user_id = ? AND hotel_id = ?");
+        $stmt->execute([$booking_id, $_SESSION['user_id'], $hotel_id]);
+        $booking = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($booking && strtolower(trim($booking['status'])) === 'confirmed') {
+            $booking_confirmed = true;
+        } else {
+            // If booking is not confirmed, redirect back to bookings
+            header('Location: user_bookings.php?error=booking_not_confirmed');
+            exit;
+        }
+    } catch (PDOException $e) {
+        // If there's an error checking the booking, redirect back
+        header('Location: user_bookings.php?error=booking_validation_error');
+        exit;
+    }
+} else {
+    // If no booking_id provided, redirect back
+    header('Location: user_bookings.php?error=invalid_booking');
+    exit;
+}
+
 // Handle review submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $rating = (float)($_POST['rating'] ?? 0);
