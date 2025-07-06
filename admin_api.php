@@ -112,7 +112,6 @@ function addHotel() {
     $location = $_POST['location'] ?? '';
     $description = $_POST['description'] ?? '';
     $price = $_POST['price'] ?? '';
-    $rating = $_POST['rating'] ?? 0;
     $image_url = '';
 
     // Handle image upload with validation
@@ -192,8 +191,8 @@ function addHotel() {
     }
     
     try {
-        $stmt = $pdo->prepare("INSERT INTO hotels (name, location, description, price, rating, image_url) VALUES (?, ?, ?, ?, ?, ?)");
-        $result = $stmt->execute([$name, $location, $description, $price, $rating, $image_url]);
+        $stmt = $pdo->prepare("INSERT INTO hotels (name, location, description, price, image_url) VALUES (?, ?, ?, ?, ?)");
+        $result = $stmt->execute([$name, $location, $description, $price, $image_url]);
         
         if ($result) {
             echo json_encode(['success' => true, 'message' => 'Hotel added successfully', 'id' => $pdo->lastInsertId()]);
@@ -218,7 +217,6 @@ function updateHotel() {
     $location = $_POST['location'] ?? '';
     $description = $_POST['description'] ?? '';
     $price = $_POST['price'] ?? '';
-    $rating = $_POST['rating'] ?? 0;
     $image_url = '';
 
     // Get current image_url if no new file is uploaded
@@ -315,8 +313,8 @@ function updateHotel() {
     }
     
     try {
-        $stmt = $pdo->prepare("UPDATE hotels SET name = ?, location = ?, description = ?, price = ?, rating = ?, image_url = ? WHERE id = ?");
-        $result = $stmt->execute([$name, $location, $description, $price, $rating, $image_url, $id]);
+        $stmt = $pdo->prepare("UPDATE hotels SET name = ?, location = ?, description = ?, price = ?, image_url = ? WHERE id = ?");
+        $result = $stmt->execute([$name, $location, $description, $price, $image_url, $id]);
         
         if ($result) {
             echo json_encode(['success' => true, 'message' => 'Hotel updated successfully']);

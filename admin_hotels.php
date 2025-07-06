@@ -92,21 +92,7 @@ $isAdmin = true; // Now properly authenticated
                     <input type="text" id="hotelPrice" name="price" placeholder="e.g., $150/night" required>
                 </div>
                 
-                <div class="form-group">
-                    <label for="hotelRating">Rating</label>
-                    <select id="hotelRating" name="rating">
-                        <option value="0">Select Rating</option>
-                        <option value="1.0">1.0</option>
-                        <option value="1.5">1.5</option>
-                        <option value="2.0">2.0</option>
-                        <option value="2.5">2.5</option>
-                        <option value="3.0">3.0</option>
-                        <option value="3.5">3.5</option>
-                        <option value="4.0">4.0</option>
-                        <option value="4.5">4.5</option>
-                        <option value="5.0">5.0</option>
-                    </select>
-                </div>
+
                 
                 <div class="form-group">
                     <label for="hotelImage">Hotel Image</label>
@@ -166,7 +152,6 @@ $isAdmin = true; // Now properly authenticated
                     <div>Hotel Info</div>
                     <div>Location</div>
                     <div>Price</div>
-                    <div>Rating</div>
                     <div>Actions</div>
                 </div>
             ` + hotelsToShow.map(hotel => `
@@ -183,7 +168,6 @@ $isAdmin = true; // Now properly authenticated
                     </div>
                     <div class="hotel-location">${hotel.location}</div>
                     <div class="hotel-price">${hotel.price}</div>
-                    <div class="hotel-rating">${hotel.rating ? '★ ' + hotel.rating : 'No rating'}</div>
                     <div class="hotel-actions">
                         <button class="btn btn-warning btn-small" onclick="editHotel(${hotel.id})">Edit</button>
                         <button class="btn btn-danger btn-small" onclick="deleteHotel(${hotel.id})">Delete</button>
@@ -219,7 +203,6 @@ $isAdmin = true; // Now properly authenticated
                 document.getElementById('hotelLocation').value = hotel.location;
                 document.getElementById('hotelDescription').value = hotel.description || '';
                 document.getElementById('hotelPrice').value = hotel.price;
-                document.getElementById('hotelRating').value = hotel.rating || 0;
                 document.getElementById('hotelModal').style.display = 'block';
             }
         }
