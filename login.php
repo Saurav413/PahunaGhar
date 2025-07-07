@@ -5,6 +5,11 @@ ini_set('display_errors', 1);
 
 session_start();
 require_once 'user_config.php';
+// Redirect super admin to their dashboard if logged in
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'super_admin') {
+    header('Location: super_admin_dashboard.php');
+    exit;
+}
 
 $error = '';
 $success = '';
@@ -115,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="navbar-left">
             <a href="homepage.php" class="logo logo-blue">Pahuna<span class="logo-highlight">Ghar</span></a>
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']): ?>
-                <?php if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin'): ?>
+                <?php if (!isset($_SESSION['user_type']) || !in_array($_SESSION['user_type'], ['admin', 'super_admin'])): ?>
                     <a href="PahunaGhar/user_bookings.php" class="nav-link">My Bookings</a>
                 <?php endif; ?>
                 <a href="lets_chat.php" class="nav-link">Let's Chat</a>
@@ -130,8 +135,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="navbar-right">
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']): ?>
                 <span class="welcome-user">Welcome, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</span>
-                <?php if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin'): ?>
-                    <a href="admin_dashboard.php" class="nav-link">Dashboard</a>
+                <?php if (isset($_SESSION['user_type']) && in_array($_SESSION['user_type'], ['admin', 'super_admin'])): ?>
+                    <a href="<?php echo $_SESSION['user_type'] === 'super_admin' ? 'super_admin_dashboard.php' : 'admin_dashboard.php'; ?>" class="nav-link">Dashboard</a>
                 <?php endif; ?>
                 <a href="logout.php" class="nav-link">Logout</a>
             <?php else: ?>
@@ -162,6 +167,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p class="login-register">Don't have an account? <a href="register.php" class="register-link">Register</a></p>
         <p class="login-register" style="margin-top: 10px; font-size: 0.9em; color: #6b7280;">
             Admin? <a href="admin_login.php" class="register-link">Use Admin Login</a>
+        </p>
+        <p class="login-register" style="margin-top: -5px; font-size: 0.9em; color: #6b7280;">
+            Super Admin? <a href="super_admin_login.php" class="register-link">Use Super Admin Login</a>
         </p>
     </div>
     <footer class="login-footer">

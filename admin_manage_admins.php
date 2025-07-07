@@ -173,6 +173,22 @@ try {
             color: #ef4444;
             font-weight: 600;
         }
+        .role-super-admin {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .role-admin {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
         .btn {
             padding: 8px 16px;
             border: none;
@@ -266,7 +282,13 @@ try {
                         <tr>
                             <td><?php echo htmlspecialchars($admin['name']); ?></td>
                             <td><?php echo htmlspecialchars($admin['email']); ?></td>
-                            <td><?php echo htmlspecialchars(ucfirst(str_replace('_', ' ', $admin['admin_role']))); ?></td>
+                            <td>
+                                <?php if ($admin['admin_role'] === 'super_admin'): ?>
+                                    <span class="role-super-admin">Super Admin</span>
+                                <?php else: ?>
+                                    <span class="role-admin">Admin</span>
+                                <?php endif; ?>
+                            </td>
                             <td>
                                 <span class="<?php echo $admin['is_active'] ? 'status-active' : 'status-inactive'; ?>">
                                     <?php echo $admin['is_active'] ? 'Active' : 'Inactive'; ?>
@@ -275,7 +297,7 @@ try {
                             <td><?php echo date('Y-m-d', strtotime($admin['created_at'])); ?></td>
                             <td><?php echo $admin['last_login'] ? date('Y-m-d H:i', strtotime($admin['last_login'])) : 'Never'; ?></td>
                             <td>
-                                <?php if ($admin['id'] !== $_SESSION['admin_id']): ?>
+                                <?php if ($admin['id'] !== $_SESSION['admin_id'] && $admin['admin_role'] !== 'super_admin'): ?>
                                     <?php if ($admin['is_active']): ?>
                                         <form method="post" style="display:inline;">
                                             <input type="hidden" name="admin_id" value="<?php echo $admin['id']; ?>">
@@ -293,8 +315,10 @@ try {
                                         <input type="hidden" name="admin_id" value="<?php echo $admin['id']; ?>">
                                         <button type="submit" name="delete_admin" class="btn btn-danger" onclick="return confirm('Delete this admin account? This action cannot be undone.')">Delete</button>
                                     </form>
-                                <?php else: ?>
+                                <?php elseif ($admin['id'] === $_SESSION['admin_id']): ?>
                                     <span style="color: #6b7280; font-style: italic;">Current User</span>
+                                <?php elseif ($admin['admin_role'] === 'super_admin'): ?>
+                                    <span style="color: #6b7280; font-style: italic;">Super Admin (protected)</span>
                                 <?php endif; ?>
                             </td>
                         </tr>

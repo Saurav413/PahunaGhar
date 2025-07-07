@@ -5,6 +5,11 @@ ini_set('display_errors', 1);
 
 session_start();
 require_once 'user_config.php';
+// Redirect super admin to their dashboard if logged in
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'super_admin') {
+    header('Location: super_admin_dashboard.php');
+    exit;
+}
 
 $error = '';
 $success = '';
@@ -25,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         try {
             // Check if admin exists and verify password
-            $stmt = $user_pdo->prepare('SELECT id, name, email, password, admin_role, is_active FROM admin_register_form WHERE email = ?');
+            $stmt = $user_pdo->prepare('SELECT id, name, email, password, admin_role, is_active FROM admin_register_form WHERE email = ? AND admin_role = "admin"');
             $stmt->execute([$email]);
             $admin = $stmt->fetch(PDO::FETCH_ASSOC);
             
@@ -101,6 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="homepage.php" class="logo logo-blue">Pahuna<span class="logo-highlight">Ghar</span> Admin</a>
         </div>
         <div class="navbar-right">
+            <a href="super_admin_login.php" class="nav-link">Super Admin</a>
             <a href="login.php" class="nav-link">User Login</a>
             <a href="homepage.php" class="nav-link">View Site</a>
         </div>
@@ -123,6 +129,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <button type="submit" class="login-btn">Admin Login</button>
         </form>
+        <div style="text-align:center; margin-top:12px; margin-bottom:12px;">
+            <span style="color:#888; font-size:1.1em;">Super Admin?</span>
+            <a href="super_admin_login.php" style="color:#2563eb; font-size:1.1em; text-decoration:underline; margin-left:4px;">Use Super Admin Login</a>
+        </div>
+        
         <p class="login-register">Need help? <a href="homepage.php" class="register-link">Contact Support</a></p>
     </div>
     <footer class="login-footer">

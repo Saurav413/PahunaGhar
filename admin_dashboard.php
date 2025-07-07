@@ -2,8 +2,8 @@
 session_start();
 require_once 'user_config.php';
 
-// Check if admin is logged in
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_type'] !== 'admin') {
+// Only allow admin and super admin users
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || !in_array($_SESSION['user_type'], ['admin', 'super_admin'])) {
     header('Location: login.php');
     exit;
 }
@@ -118,7 +118,6 @@ try {
                 <a href="admin_lets_chat.php">Let's Chat</a>
             </div>
             <div>
-                <a href="homepage.php">View Site</a>
                 <a href="logout.php">Logout</a>
             </div>
         </div>
@@ -150,10 +149,6 @@ try {
             <div class="stat-card">
                 <button class="stat-number stat-btn" id="showContactsBtn" type="button"><?php echo $totalContacts; ?></button>
                 <div class="stat-label">Total Let's Chat</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number"><?php echo $averageRating; ?>/5</div>
-                <div class="stat-label">Average Rating</div>
             </div>
         </div>
 

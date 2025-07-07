@@ -5,10 +5,10 @@ require_once 'config.php';
 
 header('Content-Type: application/json');
 
-// Check if admin is logged in
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_type'] !== 'admin') {
+// Only allow admin and super admin users
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || !in_array($_SESSION['user_type'], ['admin', 'super_admin'])) {
     http_response_code(403);
-    echo json_encode(['error' => 'Unauthorized access']);
+    echo json_encode(['error' => 'Unauthorized']);
     exit;
 }
 

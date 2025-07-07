@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once 'config.php';
+require_once 'user_config.php';
 
-// Check if admin is logged in
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['user_type'] !== 'admin') {
+// Only allow admin and super admin users
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || !in_array($_SESSION['user_type'], ['admin', 'super_admin'])) {
     header('Location: login.php');
     exit;
 }
