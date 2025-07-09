@@ -87,12 +87,12 @@ Based on the debug output, the following test credentials are available:
 
 ### eSewa
 - **ID**: 9745869500
-- **Password**: 1111
+- **Password**: password
 - **MPIN**: 5470
 
 ### Khalti
 - **ID**: 9824004077  
-- **Password**: 1111
+- **Password**: password
 - **MPIN**: 2020
 
 ## Verification

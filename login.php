@@ -112,8 +112,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
     <nav class="navbar">
@@ -164,6 +164,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <button type="submit" class="login-btn">Login</button>
         </form>
+        <p class="login-register" style="margin-top: 10px; font-size: 0.95em;">
+            <a href="forgot_password.php" class="register-link">Forgot Password?</a>
+        </p>
         <p class="login-register">Don't have an account? <a href="register.php" class="register-link">Register</a></p>
         <p class="login-register" style="margin-top: 10px; font-size: 0.9em; color: #6b7280;">
             Admin? <a href="admin_login.php" class="register-link">Use Admin Login</a>

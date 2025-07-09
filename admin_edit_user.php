@@ -50,8 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit User - Admin</title>
-    <link rel="stylesheet" href="admin_dashboard.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/admin_dashboard.css">
+    <link rel="stylesheet" href="css/styles.css">
     <style>
         body { background: #f5f8fa; font-family: 'Montserrat', Arial, sans-serif; }
         .edit-user-container { max-width: 500px; margin: 60px auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px rgba(44,62,80,0.10); padding: 36px 32px; }

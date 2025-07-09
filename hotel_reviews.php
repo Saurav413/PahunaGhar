@@ -50,7 +50,7 @@ if ($hotel_id > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reviews - <?php echo htmlspecialchars($hotel['name']); ?> - PahunaGhar</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
     <style>
         .reviews-container {
             max-width: 800px;

@@ -91,8 +91,8 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super Admin - Manage Admins - PahunaGhar</title>
-    <link rel="stylesheet" href="admin_dashboard.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/admin_dashboard.css">
+    <link rel="stylesheet" href="css/styles.css">
     <style>
         body {
             background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
