@@ -39,6 +39,44 @@ if (
         $stmt = $pdo->prepare("UPDATE bookings SET status = 'confirmed' WHERE id = ? AND user_id = ? AND status = 'available'");
         $stmt->execute([$booking_id, $user_id]);
         if ($stmt->rowCount() > 0) {
+            // Send confirmation email to user
+            try {
+                require_once __DIR__ . '/PHPMailer/src/PHPMailer.php';
+                require_once __DIR__ . '/PHPMailer/src/SMTP.php';
+                require_once __DIR__ . '/PHPMailer/src/Exception.php';
+                
+                $stmt = $pdo->prepare("SELECT u.email, u.name, b.hotel_name, b.check_in_date, b.check_out_date, b.total_price FROM bookings b LEFT JOIN user_register_form u ON b.user_id = u.id WHERE b.id = ?");
+                $stmt->execute([$booking_id]);
+                $bookingInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                if ($bookingInfo && !empty($bookingInfo['email'])) {
+                    $mail = new PHPMailer\PHPMailer\PHPMailer(true);
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'pahunaghar76@gmail.com';
+                    $mail->Password = 'ecgk wujk owbs orpr';
+                    $mail->SMTPSecure = 'tls';
+                    $mail->Port = 587;
+                    $mail->setFrom('pahunaghar76@gmail.com', 'PahunaGhar');
+                    $mail->addAddress($bookingInfo['email'], $bookingInfo['name']);
+                    $mail->Subject = 'Booking Confirmed - PahunaGhar';
+                    $mail->isHTML(true);
+                    $mail->Body = "<h2>Booking Confirmed!</h2>"
+                        . "<p>Dear {$bookingInfo['name']},</p>"
+                        . "<p>Your booking for <strong>{$bookingInfo['hotel_name']}</strong> has been <b>confirmed</b>.</p>"
+                        . "<ul>"
+                        . "<li><b>Hotel:</b> {$bookingInfo['hotel_name']}</li>"
+                        . "<li><b>Check-in:</b> {$bookingInfo['check_in_date']}</li>"
+                        . "<li><b>Check-out:</b> {$bookingInfo['check_out_date']}</li>"
+                        . "<li><b>Total Payment:</b> $" . number_format($bookingInfo['total_price'], 2) . "</li>"
+                        . "</ul>"
+                        . "<p>Thank you for booking with PahunaGhar!</p>";
+                    $mail->send();
+                }
+            } catch (Exception $e) {
+                error_log('Mail error: ' . $e->getMessage());
+            }
             $_SESSION['success'] = ucfirst($selected_method) . ' payment successful! Your booking is now confirmed.';
             header('Location: user_bookings.php');
             exit;
