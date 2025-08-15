@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 ?>
@@ -70,15 +71,15 @@ session_start();
             bottom: 0;
             z-index: 2;
             overflow: hidden;
+            pointer-events: none;
         }
         
         .floating-shape {
             position: absolute;
             border-radius: 50%;
-            background: linear-gradient(45deg, rgba(37, 99, 235, 0.1), rgba(236, 72, 153, 0.1));
-            animation: float 6s ease-in-out infinite;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(37, 99, 235, 0.05);
+            animation: float 8s ease-in-out infinite;
+            will-change: transform;
         }
         
         .floating-shape:nth-child(1) {
@@ -140,20 +141,12 @@ session_start();
         
         @keyframes float {
             0%, 100% {
-                transform: translateY(0px) rotate(0deg);
-                opacity: 0.7;
-            }
-            25% {
-                transform: translateY(-20px) rotate(90deg);
-                opacity: 1;
+                transform: translateY(0px);
+                opacity: 0.5;
             }
             50% {
-                transform: translateY(-10px) rotate(180deg);
+                transform: translateY(-15px);
                 opacity: 0.8;
-            }
-            75% {
-                transform: translateY(-30px) rotate(270deg);
-                opacity: 0.9;
             }
         }
         
@@ -165,11 +158,13 @@ session_start();
             right: 0;
             bottom: 0;
             background-image: 
-                linear-gradient(rgba(37, 99, 235, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(37, 99, 235, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 20s linear infinite;
+                linear-gradient(rgba(37, 99, 235, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(37, 99, 235, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridMove 30s linear infinite;
             z-index: 1;
+            pointer-events: none;
+            will-change: transform;
         }
         
         @keyframes gridMove {
@@ -185,8 +180,10 @@ session_start();
         .glowing-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(20px);
-            animation: glow 4s ease-in-out infinite alternate;
+            filter: blur(15px);
+            animation: glow 6s ease-in-out infinite alternate;
+            pointer-events: none;
+            will-change: opacity, transform;
         }
         
         .glowing-orb:nth-child(1) {
@@ -235,15 +232,17 @@ session_start();
             right: 0;
             bottom: 0;
             z-index: 1;
+            pointer-events: none;
         }
         
         .particle {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(37, 99, 235, 0.6);
+            width: 3px;
+            height: 3px;
+            background: rgba(37, 99, 235, 0.4);
             border-radius: 50%;
-            animation: particleFloat 15s linear infinite;
+            animation: particleFloat 20s linear infinite;
+            will-change: transform;
         }
         
         .particle:nth-child(odd) {
@@ -297,22 +296,21 @@ session_start();
         
         .hotel-card-circular {
             position: absolute;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 20px;
-            box-shadow: 
-                0 8px 32px rgba(44, 62, 80, 0.15),
-                0 0 0 1px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
             width: 300px;
             height: 450px;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease-out;
             opacity: 0;
             transform: scale(0.8) translateY(50px);
             pointer-events: none;
+            cursor: pointer;
+            will-change: transform, opacity;
         }
         
         .hotel-card-circular.active {
@@ -320,33 +318,48 @@ session_start();
             transform: scale(1) translateY(0);
             pointer-events: all;
             z-index: 10;
-            box-shadow: 
-                0 20px 60px rgba(44, 62, 80, 0.25),
-                0 0 0 1px rgba(255, 255, 255, 0.2),
-                0 0 40px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+        }
+        
+        .hotel-card-circular.active:hover {
+            transform: scale(1.02) translateY(-3px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+            }
+            50% {
+                box-shadow: 0 16px 40px rgba(37, 99, 235, 0.3);
+            }
+            100% {
+                box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+            }
         }
         
         .hotel-card-circular.prev {
-            opacity: 0.7;
-            transform: scale(0.9) translateX(-200px) translateY(-20px);
+            opacity: 0.6;
+            transform: scale(0.9) translateX(-150px) translateY(-10px);
             z-index: 5;
         }
         
         .hotel-card-circular.next {
-            opacity: 0.7;
-            transform: scale(0.9) translateX(200px) translateY(-20px);
+            opacity: 0.6;
+            transform: scale(0.9) translateX(150px) translateY(-10px);
             z-index: 5;
         }
         
         .hotel-card-circular.far-prev {
-            opacity: 0.3;
-            transform: scale(0.7) translateX(-400px) translateY(-40px);
+            opacity: 0.2;
+            transform: scale(0.8) translateX(-300px) translateY(-20px);
             z-index: 1;
         }
         
         .hotel-card-circular.far-next {
-            opacity: 0.3;
-            transform: scale(0.7) translateX(400px) translateY(-40px);
+            opacity: 0.2;
+            transform: scale(0.8) translateX(300px) translateY(-20px);
             z-index: 1;
         }
         
@@ -745,6 +758,419 @@ session_start();
         body.dark-mode .nav-dot:hover {
             background: #10b981 !important;
         }
+
+        /* Hotel Details Modal */
+        .hotel-details-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-out;
+            will-change: opacity;
+        }
+        
+        .hotel-details-modal.active {
+            opacity: 1;
+            visibility: visible;
+            display: block !important;
+        }
+        
+        .hotel-details-content {
+            position: absolute;
+            bottom: -100%;
+            left: 50%;
+            width: 95%;
+            height: 90%;
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            border-radius: 30px 30px 0 0;
+            box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.3);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            overflow: hidden;
+            will-change: transform, opacity;
+            transform: translateX(-50%) scale(0.8);
+            opacity: 0;
+            position: relative;
+        }
+        
+        .hotel-details-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .hotel-details-modal.active .hotel-details-content {
+            bottom: 0;
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+        }
+        
+        .hotel-details-top {
+            padding: 30px 30px 20px 30px;
+            text-align: center;
+            animation: topSlide 0.6s ease-out 0.1s both;
+            position: relative;
+            z-index: 2;
+        }
+        
+        @keyframes topSlide {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .hotel-details-name {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #1a2636;
+            margin: 0 0 10px 0;
+            line-height: 1.2;
+        }
+        
+        .hotel-details-location {
+            font-size: 1.1em;
+            color: #64748b;
+            margin: 0 0 25px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .hotel-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hotel-image-circle {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.2);
+            border: 8px solid rgba(255, 255, 255, 0.9);
+            position: relative;
+            animation: imageZoom 0.8s ease-out 0.3s both;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(236, 72, 153, 0.1));
+        }
+        
+        @keyframes imageZoom {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .hotel-details-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .hotel-image-circle:hover .hotel-details-image {
+            transform: scale(1.1);
+        }
+        
+        .hotel-details-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hotel-details-close:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.1);
+        }
+        
+        .hotel-details-title {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 80px;
+            color: white;
+            z-index: 5;
+        }
+        
+        .hotel-details-name {
+            font-size: 2em;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hotel-details-location {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .hotel-details-description-section {
+            padding: 0 30px 30px 30px;
+            text-align: center;
+            animation: descriptionSlide 0.6s ease-out 0.4s both;
+            position: relative;
+            z-index: 2;
+        }
+        
+        @keyframes descriptionSlide {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .hotel-details-description-section h3 {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #1a2636;
+            margin: 0 0 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .hotel-details-description {
+            font-size: 1em;
+            line-height: 1.6;
+            color: #4a5a6a;
+            margin: 0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .hotel-details-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .hotel-stat {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.1);
+        }
+        
+        .hotel-stat-value {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #2563eb;
+            margin: 0 0 5px 0;
+        }
+        
+        .hotel-stat-label {
+            font-size: 0.9em;
+            color: #64748b;
+            margin: 0;
+        }
+        
+        .hotel-details-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            padding: 0 30px 30px 30px;
+            animation: buttonSlide 0.6s ease-out 0.5s both;
+            position: relative;
+            z-index: 2;
+        }
+        
+        @keyframes buttonSlide {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .hotel-action-btn {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .hotel-action-btn.primary {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        .hotel-action-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+        
+        .hotel-action-btn.secondary {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+        }
+        
+        .hotel-action-btn.secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
+        }
+        
+        .hotel-action-btn.outline {
+            background: transparent;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+        }
+        
+        .hotel-action-btn.outline:hover {
+            background: #2563eb;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Dark mode for hotel details modal */
+        body.dark-mode .hotel-details-content {
+            background: linear-gradient(135deg, #1a1d23 0%, #0f1117 100%) !important;
+        }
+        
+        body.dark-mode .hotel-details-content::before {
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(37, 99, 235, 0.05) 0%, transparent 50%) !important;
+        }
+        
+        body.dark-mode .hotel-details-section h3 {
+            color: #f3f4f6 !important;
+        }
+        
+        body.dark-mode .hotel-details-description {
+            color: #d1d5db !important;
+        }
+        
+        body.dark-mode .hotel-stat {
+            background: rgba(35, 39, 47, 0.8) !important;
+            backdrop-filter: blur(10px) !important;
+            border: 1px solid rgba(16, 185, 129, 0.3) !important;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.1) !important;
+        }
+        
+        body.dark-mode .hotel-stat-value {
+            color: #10b981 !important;
+        }
+        
+        body.dark-mode .hotel-stat-label {
+            color: #9ca3af !important;
+        }
+        
+        body.dark-mode .hotel-action-btn.primary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3) !important;
+        }
+        
+        body.dark-mode .hotel-action-btn.primary:hover {
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4) !important;
+        }
+        
+        body.dark-mode .hotel-action-btn.outline {
+            color: #10b981 !important;
+            border-color: #10b981 !important;
+        }
+        
+        body.dark-mode .hotel-action-btn.outline:hover {
+            background: #10b981 !important;
+            color: white !important;
+        }
+        
+        body.dark-mode .hotel-image-circle {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(124, 58, 237, 0.1)) !important;
+            border: 8px solid rgba(35, 39, 47, 0.9) !important;
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.2) !important;
+        }
+        
+        /* Click indicator for hotel cards */
+        .hotel-card::before,
+        .hotel-card-circular::before {
+            content: '👆 Click for details';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(37, 99, 235, 0.9);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.7em;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            z-index: 5;
+            pointer-events: none;
+        }
+        
+        .hotel-card:hover::before,
+        .hotel-card-circular.active:hover::before {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -787,12 +1213,14 @@ session_start();
             <a href="#hotel-listings" class="browse-btn">Browse Listings</a>
         </div>
     </header>
-    <div class="container">
-        <h1 id="hotel-listings">Welcome to the Hotel Booking System</h1>
-        <div id="searchResults" style="display: none;">
-            <h2>Search Results</h2>
-            <button id="showAllBtn" style="background: #2563eb; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px;">Show All Hotels</button>
-        </div>
+            <div class="container">
+            <h1 id="hotel-listings">Welcome to the Hotel Booking System</h1>
+            <div id="searchResults" style="display: none;">
+                <h2>Search Results</h2>
+                <button id="showAllBtn" style="background: #2563eb; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px;">Show All Hotels</button>
+            </div>
+            <!-- Test button for debugging -->
+            <button onclick="testModal()" style="background: #10b981; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px;">Test Modal</button>
         
         <!-- Circular Hotel Display -->
         <div class="circular-hotel-container">
@@ -837,6 +1265,58 @@ session_start();
             <!-- Hotel listings will be loaded here -->
         </div>
     </div>
+    
+    <!-- Hotel Details Modal -->
+    <div class="hotel-details-modal" id="hotelDetailsModal" style="display: none;">
+        <div class="hotel-details-content">
+            <button class="hotel-details-close" onclick="closeHotelDetails()">×</button>
+            
+            <!-- Hotel Details at Top -->
+            <div class="hotel-details-top">
+                <h1 class="hotel-details-name" id="modalHotelName"></h1>
+                <p class="hotel-details-location">
+                    📍 <span id="modalHotelLocation"></span>
+                </p>
+                <div class="hotel-details-stats">
+                    <div class="hotel-stat">
+                        <div class="hotel-stat-value" id="modalHotelRating">0.0</div>
+                        <div class="hotel-stat-label">Rating</div>
+                    </div>
+                    <div class="hotel-stat">
+                        <div class="hotel-stat-value" id="modalHotelPrice">$0</div>
+                        <div class="hotel-stat-label">Price</div>
+                    </div>
+                    <div class="hotel-stat">
+                        <div class="hotel-stat-value" id="modalHotelReviews">0</div>
+                        <div class="hotel-stat-label">Reviews</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Circular Hotel Image in Middle -->
+            <div class="hotel-image-container">
+                <div class="hotel-image-circle">
+                    <img class="hotel-details-image" id="modalHotelImage" src="" alt="Hotel Image">
+                </div>
+            </div>
+            
+            <!-- Hotel Description -->
+            <div class="hotel-details-description-section">
+                <h3>🏨 About This Hotel</h3>
+                <p class="hotel-details-description" id="modalHotelDescription"></p>
+            </div>
+            
+            <!-- Action Buttons on Sides -->
+            <div class="hotel-details-actions">
+                <a href="#" class="hotel-action-btn primary" id="modalBookBtn">
+                    🏠 Book Now
+                </a>
+                <a href="#" class="hotel-action-btn secondary" id="modalReviewsBtn">
+                    ⭐ View Reviews
+                </a>
+            </div>
+        </div>
+    </div>
     <footer style="width:100%;background:#e6e7eb;padding:28px 0 18px 0;text-align:center;font-size:1.08em;color:#222;letter-spacing:0.5px;margin-top:48px;box-shadow:0 -2px 8px rgba(44,62,80,0.04);font-family:'Montserrat',Arial,sans-serif;">
         © 2025 <span style="font-weight:700;color:#2563eb;">PahunaGhar</span>. All rights reserved.
     </footer>
@@ -853,11 +1333,12 @@ session_start();
             if (avgRating === null || avgRating === undefined || isNaN(Number(avgRating))) {
                 avgRating = hotel.rating || 0;
             }
-            avgRating = Number(avgRating);
+            // Ensure avgRating is a number and handle safely
+            avgRating = parseFloat(avgRating) || 0;
             const reviewText = reviewCount > 0 ? `(${reviewCount} reviews)` : '(No reviews yet)';
             
             return `
-                <div class="hotel-card-circular" data-index="${index}">
+                <div class="hotel-card-circular" data-index="${index}" data-hotel-id="${hotel.id}" style="cursor: pointer;">
                     <img class="hotel-image-circular" src="${hotel.image_url}" alt="${hotel.name}" 
                          onerror="this.src='https://via.placeholder.com/300x180?text=Hotel+Image'">
                     <div class="hotel-content-circular">
@@ -868,8 +1349,8 @@ session_start();
                             <div class="hotel-price-circular">${hotel.price}</div>
                         </div>
                         <div class="hotel-actions-circular">
-                            <button onclick="window.location.href='booking.php?id=${hotel.id}'" class="book-btn-circular">Book Now</button>
-                            <button onclick="window.location.href='hotel_reviews.php?id=${hotel.id}'" class="reviews-btn-circular">Reviews</button>
+                            <button onclick="event.stopPropagation(); window.location.href='booking.php?id=${hotel.id}'" class="book-btn-circular">Book Now</button>
+                            <button onclick="event.stopPropagation(); window.location.href='hotel_reviews.php?id=${hotel.id}'" class="reviews-btn-circular">Reviews</button>
                         </div>
                     </div>
                 </div>
@@ -883,11 +1364,12 @@ session_start();
             if (avgRating === null || avgRating === undefined || isNaN(Number(avgRating))) {
                 avgRating = hotel.rating || 0;
             }
-            avgRating = Number(avgRating);
+            // Ensure avgRating is a number and handle safely
+            avgRating = parseFloat(avgRating) || 0;
             const reviewText = reviewCount > 0 ? `(${reviewCount} reviews)` : '(No reviews yet)';
             
             return `
-                <div class="hotel-card">
+                <div class="hotel-card" data-hotel-id="${hotel.id}" style="cursor: pointer;">
                     <img class="hotel-image" src="${hotel.image_url}" alt="${hotel.name}" 
                          onerror="this.src='https://via.placeholder.com/250x150?text=Hotel+Image'">
                     <div class="hotel-content">
@@ -898,8 +1380,8 @@ session_start();
                             <div class="hotel-price">${hotel.price}</div>
                         </div>
                         <div class="hotel-actions">
-                            <button onclick="window.location.href='booking.php?id=${hotel.id}'" class="book-btn">Book Now</button>
-                            <button onclick="window.location.href='hotel_reviews.php?id=${hotel.id}'" class="reviews-btn">View Reviews</button>
+                            <button onclick="event.stopPropagation(); window.location.href='booking.php?id=${hotel.id}'" class="book-btn">Book Now</button>
+                            <button onclick="event.stopPropagation(); window.location.href='hotel_reviews.php?id=${hotel.id}'" class="reviews-btn">View Reviews</button>
                         </div>
                     </div>
                 </div>
@@ -925,7 +1407,24 @@ session_start();
             allHotels.forEach((hotel, index) => {
                 const card = document.createElement('div');
                 card.innerHTML = createCircularHotelCard(hotel, index);
-                display.appendChild(card.firstElementChild);
+                const hotelCard = card.firstElementChild;
+                display.appendChild(hotelCard);
+                
+                        // Add click event listener with proper event handling
+        hotelCard.addEventListener('click', function(e) {
+            // Don't trigger if clicking on buttons
+            if (e.target.closest('.hotel-actions-circular')) {
+                return;
+            }
+            console.log('Hotel card clicked:', hotel.name);
+            
+            // Add a quick zoom effect to the clicked card
+            hotelCard.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                hotelCard.style.transform = '';
+                showHotelDetails(hotel.id, index);
+            }, 150);
+        });
                 
                 // Create navigation dot
                 const dot = document.createElement('div');
@@ -993,15 +1492,40 @@ session_start();
             hotelList.innerHTML = hotels.length > 0
                 ? hotels.map(hotel => createHotelCard(hotel)).join('')
                 : '<div class="no-hotels">No hotels found</div>';
+            
+            // Add click event listeners to hotel cards
+            if (hotels.length > 0) {
+                const hotelCards = hotelList.querySelectorAll('.hotel-card');
+                hotelCards.forEach((card, index) => {
+                    const hotelId = card.getAttribute('data-hotel-id');
+                    card.addEventListener('click', function(e) {
+                        // Don't trigger if clicking on buttons
+                        if (e.target.closest('.hotel-actions')) {
+                            return;
+                        }
+                        console.log('Hotel card clicked (mobile):', hotels[index].name);
+                        
+                        // Add a quick zoom effect to the clicked card
+                        card.style.transform = 'scale(1.05)';
+                        setTimeout(() => {
+                            card.style.transform = '';
+                            showHotelDetails(hotelId, index);
+                        }, 150);
+                    });
+                });
+            }
         }
 
         // Fetch hotels from the database on page load
         function loadHotelsFromDB() {
+            console.log('Loading hotels from database...');
             fetch('public_api.php?action=get_hotels')
                 .then(response => response.json())
                 .then(data => {
+                    console.log('Hotels data received:', data);
                     if (data.success && data.hotels.length > 0) {
                         allHotels = data.hotels;
+                        console.log('Hotels loaded:', allHotels.length, 'hotels');
                         if (isMobile) {
                             displayHotels(allHotels);
                             document.getElementById('hotel-list').style.display = 'grid';
@@ -1010,6 +1534,7 @@ session_start();
                             updateCircularDisplay();
                         }
                     } else {
+                        console.log('No hotels found in response');
                         document.getElementById('hotel-list').innerHTML = '<div class="no-hotels">No hotels found</div>';
                         document.querySelector('.circular-hotel-container').style.display = 'none';
                     }
@@ -1153,10 +1678,13 @@ session_start();
 
         // Wheel event for circular navigation
         let wheelTimeout;
+        let isWheeling = false;
         function handleWheel(e) {
-            if (isMobile) return;
+            if (isMobile || isWheeling) return;
             
             e.preventDefault();
+            isWheeling = true;
+            
             clearTimeout(wheelTimeout);
             
             wheelTimeout = setTimeout(() => {
@@ -1165,7 +1693,8 @@ session_start();
                 } else {
                     prevHotel();
                 }
-            }, 50);
+                isWheeling = false;
+            }, 100);
         }
 
         // Keyboard navigation for circular display
@@ -1178,6 +1707,100 @@ session_start();
             } else if (e.key === 'ArrowLeft') {
                 e.preventDefault();
                 prevHotel();
+            } else if (e.key === 'Escape') {
+                closeHotelDetails();
+            }
+        }
+        
+        // Hotel Details Modal Functions
+        function showHotelDetails(hotelId, index) {
+            console.log('showHotelDetails called with:', { hotelId, index });
+            
+            const hotel = allHotels.find(h => h.id == hotelId) || allHotels[index];
+            if (!hotel) {
+                console.error('Hotel not found:', { hotelId, index });
+                return;
+            }
+            
+            console.log('Found hotel:', hotel);
+            
+            // Populate modal content
+            document.getElementById('modalHotelImage').src = hotel.image_url;
+            document.getElementById('modalHotelName').textContent = hotel.name;
+            document.getElementById('modalHotelLocation').textContent = hotel.location;
+            document.getElementById('modalHotelDescription').textContent = hotel.description;
+            
+            // Set rating
+            let avgRating = hotel.avg_rating;
+            if (avgRating === null || avgRating === undefined || isNaN(Number(avgRating))) {
+                avgRating = hotel.rating || 0;
+            }
+            // Ensure avgRating is a number and handle the toFixed method safely
+            avgRating = parseFloat(avgRating) || 0;
+            document.getElementById('modalHotelRating').textContent = avgRating.toFixed(1);
+            
+            // Set price
+            document.getElementById('modalHotelPrice').textContent = hotel.price;
+            
+            // Set review count
+            const reviewCount = hotel.review_count || 0;
+            document.getElementById('modalHotelReviews').textContent = reviewCount;
+            
+            // Set action buttons
+            document.getElementById('modalBookBtn').href = `booking.php?id=${hotel.id}`;
+            document.getElementById('modalReviewsBtn').href = `hotel_reviews.php?id=${hotel.id}`;
+            
+            // Show modal with animation
+            const modal = document.getElementById('hotelDetailsModal');
+            console.log('Modal element before adding active:', modal);
+            
+            // First make it visible
+            modal.style.display = 'block';
+            
+            // Force a repaint
+            modal.offsetHeight;
+            
+            // Then add active class for animation
+            modal.classList.add('active');
+            console.log('Modal classes after adding active:', modal.className);
+            
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+            
+            console.log('Modal should now be visible');
+        }
+        
+        function closeHotelDetails() {
+            const modal = document.getElementById('hotelDetailsModal');
+            modal.classList.remove('active');
+            
+            // Hide modal after animation
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+            
+            // Re-enable body scroll
+            document.body.style.overflow = '';
+        }
+        
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('hotelDetailsModal');
+            if (e.target === modal) {
+                closeHotelDetails();
+            }
+        });
+        
+        // Test function for debugging
+        function testModal() {
+            console.log('Test modal function called');
+            console.log('Modal element:', document.getElementById('hotelDetailsModal'));
+            console.log('Modal content:', document.querySelector('.hotel-details-content'));
+            
+            if (allHotels.length > 0) {
+                showHotelDetails(allHotels[0].id, 0);
+            } else {
+                alert('No hotels loaded yet. Please wait for hotels to load.');
             }
         }
 

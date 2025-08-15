@@ -549,3 +549,159 @@
 [09-Jul-2025 22:20:14 Europe/Berlin] Booking found. Current status: available
 [09-Jul-2025 22:20:14 Europe/Berlin] Update query rowCount: 1
 [09-Jul-2025 22:20:14 Europe/Berlin] Booking status updated to confirmed - SUCCESS
+[12-Jul-2025 20:17:26 Europe/Berlin] === eSewa MPIN Check Debug ===
+[12-Jul-2025 20:17:26 Europe/Berlin] Session eSewa ID: 9824004077
+[12-Jul-2025 20:17:26 Europe/Berlin] Session logged_in: 1
+[12-Jul-2025 20:17:26 Europe/Berlin] POST mpin: 5470
+[12-Jul-2025 20:17:26 Europe/Berlin] Request method: POST
+[12-Jul-2025 20:17:26 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[12-Jul-2025 20:17:26 Europe/Berlin] Database query result: User found
+[12-Jul-2025 20:17:26 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[12-Jul-2025 20:17:26 Europe/Berlin] MPIN match: YES
+[12-Jul-2025 20:17:26 Europe/Berlin] MPIN verification SUCCESS
+[12-Jul-2025 20:17:26 Europe/Berlin] === Update Booking Status Debug ===
+[12-Jul-2025 20:17:26 Europe/Berlin] Session user_id: 8
+[12-Jul-2025 20:17:26 Europe/Berlin] Session can_confirm_booking: 43
+[12-Jul-2025 20:17:26 Europe/Berlin] Session logged_in: 1
+[12-Jul-2025 20:17:26 Europe/Berlin] POST booking_id: 43
+[12-Jul-2025 20:17:26 Europe/Berlin] Booking found. Current status: available
+[12-Jul-2025 20:17:26 Europe/Berlin] Update query rowCount: 1
+[12-Jul-2025 20:17:26 Europe/Berlin] Booking status updated to confirmed - SUCCESS
+[12-Jul-2025 20:17:31 Europe/Berlin] === eSewa MPIN Check Debug ===
+[12-Jul-2025 20:17:31 Europe/Berlin] Session eSewa ID: 9824004077
+[12-Jul-2025 20:17:31 Europe/Berlin] Session logged_in: 1
+[12-Jul-2025 20:17:31 Europe/Berlin] POST mpin: 5470
+[12-Jul-2025 20:17:31 Europe/Berlin] Request method: POST
+[12-Jul-2025 20:17:31 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[12-Jul-2025 20:17:31 Europe/Berlin] Database query result: User found
+[12-Jul-2025 20:17:31 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[12-Jul-2025 20:17:31 Europe/Berlin] MPIN match: YES
+[12-Jul-2025 20:17:31 Europe/Berlin] MPIN verification SUCCESS
+[12-Jul-2025 20:17:31 Europe/Berlin] === eSewa MPIN Check Debug ===
+[12-Jul-2025 20:17:31 Europe/Berlin] Session eSewa ID: 9824004077
+[12-Jul-2025 20:17:31 Europe/Berlin] Session logged_in: 1
+[12-Jul-2025 20:17:31 Europe/Berlin] POST mpin: 5470
+[12-Jul-2025 20:17:31 Europe/Berlin] Request method: POST
+[12-Jul-2025 20:17:31 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[12-Jul-2025 20:17:31 Europe/Berlin] Database query result: User found
+[12-Jul-2025 20:17:31 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[12-Jul-2025 20:17:31 Europe/Berlin] MPIN match: YES
+[12-Jul-2025 20:17:31 Europe/Berlin] MPIN verification SUCCESS
+[12-Jul-2025 20:17:31 Europe/Berlin] === eSewa MPIN Check Debug ===
+[12-Jul-2025 20:17:31 Europe/Berlin] Session eSewa ID: 9824004077
+[12-Jul-2025 20:17:31 Europe/Berlin] Session logged_in: 1
+[12-Jul-2025 20:17:31 Europe/Berlin] POST mpin: 5470
+[12-Jul-2025 20:17:31 Europe/Berlin] Request method: POST
+[12-Jul-2025 20:17:31 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[12-Jul-2025 20:17:31 Europe/Berlin] Database query result: User found
+[12-Jul-2025 20:17:31 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[12-Jul-2025 20:17:31 Europe/Berlin] MPIN match: YES
+[12-Jul-2025 20:17:31 Europe/Berlin] MPIN verification SUCCESS
+[12-Jul-2025 20:17:31 Europe/Berlin] === eSewa MPIN Check Debug ===
+[12-Jul-2025 20:17:31 Europe/Berlin] Session eSewa ID: 9824004077
+[12-Jul-2025 20:17:31 Europe/Berlin] Session logged_in: 1
+[12-Jul-2025 20:17:31 Europe/Berlin] POST mpin: 5470
+[12-Jul-2025 20:17:31 Europe/Berlin] Request method: POST
+[12-Jul-2025 20:17:31 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[12-Jul-2025 20:17:31 Europe/Berlin] Database query result: User found
+[12-Jul-2025 20:17:31 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[12-Jul-2025 20:17:31 Europe/Berlin] MPIN match: YES
+[12-Jul-2025 20:17:31 Europe/Berlin] MPIN verification SUCCESS
+[12-Jul-2025 20:17:31 Europe/Berlin] === eSewa MPIN Check Debug ===
+[12-Jul-2025 20:17:31 Europe/Berlin] Session eSewa ID: 9824004077
+[12-Jul-2025 20:17:31 Europe/Berlin] Session logged_in: 1
+[12-Jul-2025 20:17:31 Europe/Berlin] POST mpin: 5470
+[12-Jul-2025 20:17:31 Europe/Berlin] Request method: POST
+[12-Jul-2025 20:17:31 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[12-Jul-2025 20:17:31 Europe/Berlin] Database query result: User found
+[12-Jul-2025 20:17:31 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[12-Jul-2025 20:17:31 Europe/Berlin] MPIN match: YES
+[12-Jul-2025 20:17:31 Europe/Berlin] MPIN verification SUCCESS
+[12-Jul-2025 20:17:31 Europe/Berlin] === Update Booking Status Debug ===
+[12-Jul-2025 20:17:31 Europe/Berlin] Session user_id: 8
+[12-Jul-2025 20:17:31 Europe/Berlin] Session can_confirm_booking: 43
+[12-Jul-2025 20:17:31 Europe/Berlin] Session logged_in: 1
+[12-Jul-2025 20:17:31 Europe/Berlin] POST booking_id: 43
+[12-Jul-2025 20:17:31 Europe/Berlin] Booking found. Current status: confirmed
+[12-Jul-2025 20:17:31 Europe/Berlin] Update query rowCount: 0
+[12-Jul-2025 20:17:31 Europe/Berlin] Booking status not updated (possibly already confirmed) - returning fail
+[12-Jul-2025 20:17:31 Europe/Berlin] Returning fail
+[12-Jul-2025 20:17:31 Europe/Berlin] === Update Booking Status Debug ===
+[12-Jul-2025 20:17:31 Europe/Berlin] Session user_id: 8
+[12-Jul-2025 20:17:31 Europe/Berlin] Session can_confirm_booking: NOT SET
+[12-Jul-2025 20:17:31 Europe/Berlin] Session logged_in: 1
+[12-Jul-2025 20:17:31 Europe/Berlin] POST booking_id: 43
+[12-Jul-2025 20:17:31 Europe/Berlin] Session flag can_confirm_booking missing or does not match booking_id - returning fail
+[12-Jul-2025 20:17:31 Europe/Berlin] === Update Booking Status Debug ===
+[12-Jul-2025 20:17:31 Europe/Berlin] Session user_id: 8
+[12-Jul-2025 20:17:31 Europe/Berlin] Session can_confirm_booking: NOT SET
+[12-Jul-2025 20:17:31 Europe/Berlin] Session logged_in: 1
+[12-Jul-2025 20:17:31 Europe/Berlin] POST booking_id: 43
+[12-Jul-2025 20:17:31 Europe/Berlin] Session flag can_confirm_booking missing or does not match booking_id - returning fail
+[12-Jul-2025 20:17:31 Europe/Berlin] === Update Booking Status Debug ===
+[12-Jul-2025 20:17:31 Europe/Berlin] Session user_id: 8
+[12-Jul-2025 20:17:31 Europe/Berlin] Session can_confirm_booking: NOT SET
+[12-Jul-2025 20:17:31 Europe/Berlin] Session logged_in: 1
+[12-Jul-2025 20:17:31 Europe/Berlin] POST booking_id: 43
+[12-Jul-2025 20:17:31 Europe/Berlin] Session flag can_confirm_booking missing or does not match booking_id - returning fail
+[12-Jul-2025 20:17:31 Europe/Berlin] === Update Booking Status Debug ===
+[12-Jul-2025 20:17:31 Europe/Berlin] Session user_id: 8
+[12-Jul-2025 20:17:31 Europe/Berlin] Session can_confirm_booking: NOT SET
+[12-Jul-2025 20:17:31 Europe/Berlin] Session logged_in: 1
+[12-Jul-2025 20:17:31 Europe/Berlin] POST booking_id: 43
+[12-Jul-2025 20:17:31 Europe/Berlin] Session flag can_confirm_booking missing or does not match booking_id - returning fail
+[12-Jul-2025 20:18:10 Europe/Berlin] === eSewa MPIN Check Debug ===
+[12-Jul-2025 20:18:10 Europe/Berlin] Session eSewa ID: 9824004077
+[12-Jul-2025 20:18:10 Europe/Berlin] Session logged_in: 1
+[12-Jul-2025 20:18:10 Europe/Berlin] POST mpin: 5470
+[12-Jul-2025 20:18:10 Europe/Berlin] Request method: POST
+[12-Jul-2025 20:18:10 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[12-Jul-2025 20:18:10 Europe/Berlin] Database query result: User found
+[12-Jul-2025 20:18:10 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[12-Jul-2025 20:18:10 Europe/Berlin] MPIN match: YES
+[12-Jul-2025 20:18:10 Europe/Berlin] MPIN verification SUCCESS
+[12-Jul-2025 20:18:10 Europe/Berlin] === Update Booking Status Debug ===
+[12-Jul-2025 20:18:10 Europe/Berlin] Session user_id: 8
+[12-Jul-2025 20:18:10 Europe/Berlin] Session can_confirm_booking: 46
+[12-Jul-2025 20:18:10 Europe/Berlin] Session logged_in: 1
+[12-Jul-2025 20:18:10 Europe/Berlin] POST booking_id: 46
+[12-Jul-2025 20:18:10 Europe/Berlin] Booking found. Current status: available
+[12-Jul-2025 20:18:10 Europe/Berlin] Update query rowCount: 1
+[12-Jul-2025 20:18:10 Europe/Berlin] Booking status updated to confirmed - SUCCESS
+[13-Jul-2025 05:12:12 Europe/Berlin] === eSewa MPIN Check Debug ===
+[13-Jul-2025 05:12:12 Europe/Berlin] Session eSewa ID: 9824004077
+[13-Jul-2025 05:12:12 Europe/Berlin] Session logged_in: 1
+[13-Jul-2025 05:12:12 Europe/Berlin] POST mpin: 5470
+[13-Jul-2025 05:12:12 Europe/Berlin] Request method: POST
+[13-Jul-2025 05:12:12 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[13-Jul-2025 05:12:12 Europe/Berlin] Database query result: User found
+[13-Jul-2025 05:12:12 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[13-Jul-2025 05:12:12 Europe/Berlin] MPIN match: YES
+[13-Jul-2025 05:12:12 Europe/Berlin] MPIN verification SUCCESS
+[13-Jul-2025 05:12:12 Europe/Berlin] === Update Booking Status Debug ===
+[13-Jul-2025 05:12:12 Europe/Berlin] Session user_id: 8
+[13-Jul-2025 05:12:12 Europe/Berlin] Session can_confirm_booking: 47
+[13-Jul-2025 05:12:12 Europe/Berlin] Session logged_in: 1
+[13-Jul-2025 05:12:12 Europe/Berlin] POST booking_id: 47
+[13-Jul-2025 05:12:12 Europe/Berlin] Booking found. Current status: available
+[13-Jul-2025 05:12:12 Europe/Berlin] Update query rowCount: 1
+[13-Jul-2025 05:12:12 Europe/Berlin] Booking status updated to confirmed - SUCCESS
+[13-Jul-2025 06:19:07 Europe/Berlin] === eSewa MPIN Check Debug ===
+[13-Jul-2025 06:19:07 Europe/Berlin] Session eSewa ID: 9824004077
+[13-Jul-2025 06:19:07 Europe/Berlin] Session logged_in: 1
+[13-Jul-2025 06:19:07 Europe/Berlin] POST mpin: 5470
+[13-Jul-2025 06:19:07 Europe/Berlin] Request method: POST
+[13-Jul-2025 06:19:07 Europe/Berlin] Processing MPIN check - eSewa ID: 9824004077, MPIN: 5470
+[13-Jul-2025 06:19:07 Europe/Berlin] Database query result: User found
+[13-Jul-2025 06:19:07 Europe/Berlin] Stored MPIN: 5470, Input MPIN: 5470
+[13-Jul-2025 06:19:07 Europe/Berlin] MPIN match: YES
+[13-Jul-2025 06:19:07 Europe/Berlin] MPIN verification SUCCESS
+[13-Jul-2025 06:19:07 Europe/Berlin] === Update Booking Status Debug ===
+[13-Jul-2025 06:19:07 Europe/Berlin] Session user_id: 12
+[13-Jul-2025 06:19:07 Europe/Berlin] Session can_confirm_booking: 49
+[13-Jul-2025 06:19:07 Europe/Berlin] Session logged_in: 1
+[13-Jul-2025 06:19:07 Europe/Berlin] POST booking_id: 49
+[13-Jul-2025 06:19:07 Europe/Berlin] Booking found. Current status: available
+[13-Jul-2025 06:19:07 Europe/Berlin] Update query rowCount: 1
+[13-Jul-2025 06:19:07 Europe/Berlin] Booking status updated to confirmed - SUCCESS
+[13-Jul-2025 06:19:07 Europe/Berlin] Mail error: SMTP Error: Could not connect to SMTP host. Failed to connect to server

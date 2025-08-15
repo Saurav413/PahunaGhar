@@ -37,6 +37,7 @@ h1 {
     min-height: 380px;
     max-height: 450px;
     transition: transform 0.2s cubic-bezier(.4,2,.6,1), box-shadow 0.2s;
+    cursor: pointer;
 }
 .hotel-card:hover {
     transform: translateY(-10px) scale(1.04);
